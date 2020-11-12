@@ -1,6 +1,10 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 let app = angular.module('cookstarter', ['ngRoute', 'ngStorage']);
-const contextPath = 'http://localhost:8189/cookstarter'
+const contextPath = 'http://localhost:8189/cookstarter';
+const contextPathUserService = 'https://cookstarter-users-service.herokuapp.com';
+const contextPathPictureService = 'https://picture-service.herokuapp.com';
+const contextPathRestaurantService = 'https://cookstarter-restaurant-service.herokuapp.com';
+const contextPathOrderService = 'https://cs-order-service.herokuapp.com';
 
 app.config(function ($routeProvider) {
     $routeProvider
@@ -9,7 +13,7 @@ app.config(function ($routeProvider) {
         })
         .when('/login', {
             templateUrl: 'login.html',
-            controller: 'loginControllerApiV1'
+            controller: 'loginCtrl'
         })
         .when('/customer', {
             templateUrl: 'customer.html',
@@ -29,7 +33,7 @@ app.config(function ($routeProvider) {
         })
         .when('/login', {
             templateUrl: 'login/login.html',
-            controller: 'loginControllerApiV1'
+            controller: 'loginCtrl'
         })
         .otherwise({template: '<h1>404 Error (роутинг провайденр не нашел такой путь)</h1>'})
 });

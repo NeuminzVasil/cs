@@ -1,17 +1,19 @@
-/// <reference path = "index.js"/>
-const contextPathUserService = 'https://cookstarter-users-service.herokuapp.com'
+///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.controller('loginControllerApiV1', function ($log, $scope, $window, $http, $localStorage) {
+app.controller('loginCtrl', function ($log, $scope, $window, $http, $localStorage) {
     $scope.tryToAuth = function () {
-        $http.post(contextPathUserService + '/auth', $scope.user)
-            .then(function (response) {
-                if (response.data.token) {
-                    $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-                    $log.info("birer:" , response.data.token);
-                    $localStorage.currentUser = {username: $scope.user.username, token: response.data.token};
-                    $window.location.href = '#!/';
-                }
-            });
+        $http.post(contextPathUserService + '/auth', $scope.user).then(function success(response) {
+            if (response.data.token) {
+                $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
+                $log.info(response.data.token);
+                $localStorage.currentUser = {username: $scope.user.username, token: response.data.token};
+                $window.location.href = '#!/';
+            }
+        }, function error(response) {
+
+            $log.info(response);
+
+        });
     };
 
     $scope.tryToLogout = function () {

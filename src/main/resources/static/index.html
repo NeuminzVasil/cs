@@ -21,12 +21,30 @@
 
     <script src="index.js"></script>
     <script src="login/login.js"></script>
+    <script src="welcome/welcome.js"></script>
 
-    <title>CookStarterNew</title>
+    <title>LLC CookStarter</title>
 
     <!-- CSS connecting people -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=https://fonts.googleapis.com/css?family=Inconsolata:400,500,600,700|Raleway:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/line-awesome/css/line-awesome.min.css" rel="stylesheet">
+    <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
     <!--  <link href="../style.css" rel="stylesheet"> мой css-->
 
 </head>
@@ -34,19 +52,23 @@
 <!-- Header -->
 <header class="container">
 
-    <nav class="navbar navbar-light custom-navbar">
+    <nav class="navbar navbar-light custom-navbar" ng-controller="loginCtrl">
         <div class="container">
             <a class="navbar-brand" href="#!/">cookStarter ({{getUserName()}})</a>
+
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item" ng-show="isLoggedIn()">
                     <a class="nav-link" href="#">Рестораны</a>
                 </li>
+
                 <li class="nav-item" ng-hide="isLoggedIn()">
                     <a class="nav-link" href="#!/login">Войти</a></li>
+
                 <li class="nav-item" ng-show="isLoggedIn()">
                     <a class="nav-link" href="#!/login" ng-click="tryToLogout()">Выйти</a>
                 </li>
+
             </ul>
         </div>
     </nav>
