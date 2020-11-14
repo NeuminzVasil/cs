@@ -24,6 +24,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'login/registerNewRestaurant.html',
             controller: 'loginCtrl'
         })
+        .when('/restaurantInfo', {
+            templateUrl: 'restaurantInfo/restaurantInfo.html',
+            controller: 'restaurantInfoCtrl'
+        })
         .otherwise({template: '<h1>404 Error (путь не найден)</h1>'})
 });
 

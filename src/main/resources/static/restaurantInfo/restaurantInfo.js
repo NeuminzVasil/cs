@@ -1,26 +1,6 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.factory('restaurantsFactory', function () {
-    return {
-        restaurantsJSON:
-            {
-                dataCreate: new Date(),
-                orderNumber: null,
-                department: null,
-                comment: null,
-                invoiceNumber: null,
-                totalPrice: null,
-                sentToPrice: false,
-                sentToApprove: false,
-                sentToPurchase: false,
-                resolveDate: null,
-                customer: {id: null},
-                purchases: []
-            }
-    }
-});
-
-app.controller('welcomeCtrl', function ($log, $scope, $window, $http, $localStorage) {
+app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $localStorage) {
 
 
     /**
@@ -49,7 +29,7 @@ app.controller('welcomeCtrl', function ($log, $scope, $window, $http, $localStor
     $scope.getAllRest();
 
     /**
-     * Получить картинку ресторана по ID картинки
+     * Получить картинку ресторана по ID (ID чего указываем, ID картинки или ресторана ?)
      * @returns {string}
      */
     $scope.getPicture = function (pictureId) {
@@ -57,16 +37,6 @@ app.controller('welcomeCtrl', function ($log, $scope, $window, $http, $localStor
             return "https://picture-service.herokuapp.com/picture/restaurant/get/" + pictureId + "?Authorization=Bearer%20" + $localStorage.currentUser.token;
         }
         return "assets/img/notFound.png";
-    };
-
-    /**
-     * Перейти на страницу ресторана по ID ресторана
-     */
-    $scope.showRestaurantById = function (restaurantId) {
-        if (restaurantId != null) {
-            $log.info(restaurantId);
-            // получить детали по текущему ресторану и перейти на его страничку с отображением данных
-        }
     };
 
 });
