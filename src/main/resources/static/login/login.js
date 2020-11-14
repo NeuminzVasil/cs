@@ -32,6 +32,8 @@ app.controller('loginCtrl', function ($log, $scope, $window, $http, $localStorag
         return null;
     }
 
+
+
     $scope.registerNewUser = function () {
         $http.post(contextPathUserService + '/reg/customer', $scope.userJSON).then(function success(response) {
             $log.info($scope.userJSON);

@@ -54,7 +54,7 @@ app.controller('welcomeCtrl', function ($log, $scope, $window, $http, $localStor
      */
     $scope.getPicture = function (pictureId) {
         if (pictureId != null) {
-            return "https://picture-service.herokuapp.com/picture/restaurant/get/" + pictureId + "?Authorization=Bearer%20eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjM0NTAwMDcwLCJpYXQiOjE2MDI5NjQwNzB9.1HLjqDbZz5VN6B268zQA5CVCQ0maYmyaWcY6YOMoMow"
+            return "https://picture-service.herokuapp.com/picture/restaurant/get/" + pictureId + "?Authorization=Bearer%20" + $localStorage.currentUser.token;
         }
         return "assets/img/notFound.png";
     };
