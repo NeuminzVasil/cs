@@ -9,21 +9,18 @@ const contextPathOrderService = 'https://cs-order-service.herokuapp.com';
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'welcome.html'
+            templateUrl: 'welcome.html',
+            controller: 'welcomeCtrl'
         })
         .when('/login', {
             templateUrl: 'login.html',
             controller: 'loginCtrl'
         })
-        .when('/customer', {
-            templateUrl: 'customer.html',
-            controller: 'customerControllerApiV1'
+        .when('/registerNewUser', {
+            templateUrl: 'login/registerNewUser.html',
+            controller: 'loginCtrl'
         })
-        .when('/customer', {
-            templateUrl: 'customer.html',
-            controller: 'customerControllerApiV1'
-        })
-        .otherwise({template: '<h1>404 Error (роутинг провайденр не нашел такой путь)</h1>'})
+        .otherwise({template: '<h1>404 Error (путь не найден)</h1>'})
 });
 
 app.config(function ($routeProvider) {

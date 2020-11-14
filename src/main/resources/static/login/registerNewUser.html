@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="cookstarter">
+<head>
+
+</head>
+
+<body ng-controller="loginCtrl">
+
+<!--вывод списока данных на страницу -->
+<h3>Зарегистрировать нового пользователя</h3>
+<form ng-submit="registerNewUser()">
+    <input type="text" name="username" ng-model=userJSON.username>
+    <input type="password" name="password" ng-model=userJSON.password>
+    <input type="text" name="firstName" ng-model=userJSON.firstName>
+    <input type="text" name="lastName" ng-model=userJSON.lastName>
+    <input type="email" name="email" ng-model=userJSON.email>
+    <button class="btn btn-outline-primary" type="submit">Зарегистрировать</button>
+</form>
+<a class="nav-link" href="#">вернуться на главную</a>
+
+
+</body>
+</html>

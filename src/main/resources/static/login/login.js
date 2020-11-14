@@ -31,8 +31,21 @@ app.controller('loginCtrl', function ($log, $scope, $window, $http, $localStorag
         if ($localStorage.currentUser) return $localStorage.currentUser.username;
         return null;
     }
-});
 
+    $scope.registerNewUser = function () {
+        $http.post(contextPathUserService + '/reg/customer', $scope.userJSON).then(function success(response) {
+            $log.info($scope.userJSON);
+            // $window.location.href = '#!/';
+            $log.info(response);
+            $location.path('#!/');
+
+        }, function error(response) {
+
+            $log.info(response);
+
+        });
+    };
+});
 
 
 
