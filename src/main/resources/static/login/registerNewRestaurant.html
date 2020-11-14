@@ -1,0 +1,30 @@
+<div class="container" ng-controller="loginCtrl">
+
+    <div class="row">
+
+        <h3 class="col-12">Зарегистрировать новый ресторан</h3>
+
+        <form class="col-12" ng-submit="registerNewRestaurant()">
+            <label for="registerUsername">Логин ресторана</label>
+            <input class="col-12"
+                   placeholder="username"
+                   id="registerUsername"
+                   type="text"
+                   name="username"
+                   ng-model=restaurantJSON.username>
+
+            <label for="registerPassword">Пароль ресторана</label>
+            <input class="col-12"
+                   placeholder="password"
+                   id="registerPassword"
+                   type="password"
+                   name="password"
+                   ng-model=restaurantJSON.password>
+            <input hidden type="text" name="role" ng-model=restaurantJSON.role>
+            <button class="col-12 btn btn-outline-primary" type="submit">Зарегистрировать ресторан</button>
+        </form>
+    </div>
+
+    <a class="col-12 btn btn-secondary" href="#">вернуться на главную</a>
+
+</div>

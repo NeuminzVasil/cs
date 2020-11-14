@@ -62,8 +62,12 @@
                     <a class="nav-link" href="#">Все рестораны</a>
                 </li>
 
-                <li class="nav-item" ng-show="isLoggedIn()">
-                    <a class="nav-link" href="#!/registerNewUser">Регистрация</a>
+                <li class="nav-item" ng-show="!isLoggedIn()">
+                    <a class="nav-link" href="#!/registerNewUser">Регистрация пользователя</a>
+                </li>
+
+                <li class="nav-item" ng-show="!isLoggedIn()">
+                    <a class="nav-link" href="#!/registerNewRestaurant">Регистрация ресторана</a>
                 </li>
 
                 <li class="nav-item" ng-hide="isLoggedIn()">

@@ -35,14 +35,22 @@ app.controller('loginCtrl', function ($log, $scope, $window, $http, $localStorag
     $scope.registerNewUser = function () {
         $http.post(contextPathUserService + '/reg/customer', $scope.userJSON).then(function success(response) {
             $log.info($scope.userJSON);
-            // $window.location.href = '#!/';
+            $window.location.href = '#!/';
             $log.info(response);
-            $location.path('#!/');
 
         }, function error(response) {
-
+            $log.info(response);
+        });
+    };
+    $scope.registerNewRestaurant = function () {
+        $scope.restaurantJSON.role = "RESTAURANT_ADMIN";
+        $http.post(contextPathUserService + '/reg/restaurant', $scope.restaurantJSON).then(function success(response) {
+            $log.info($scope.restaurantJSON);
+            $window.location.href = '#!/';
             $log.info(response);
 
+        }, function error(response) {
+            $log.info(response);
         });
     };
 });

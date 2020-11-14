@@ -1,23 +1,54 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="cookstarter">
-<head>
+<div class="container" ng-controller="loginCtrl">
 
-</head>
+    <div class="row">
 
-<body ng-controller="loginCtrl">
+        <h3 class="col-12">Зарегистрировать нового пользователя</h3>
 
-<!--вывод списока данных на страницу -->
-<h3>Зарегистрировать нового пользователя</h3>
-<form ng-submit="registerNewUser()">
-    <input type="text" name="username" ng-model=userJSON.username>
-    <input type="password" name="password" ng-model=userJSON.password>
-    <input type="text" name="firstName" ng-model=userJSON.firstName>
-    <input type="text" name="lastName" ng-model=userJSON.lastName>
-    <input type="email" name="email" ng-model=userJSON.email>
-    <button class="btn btn-outline-primary" type="submit">Зарегистрировать</button>
-</form>
-<a class="nav-link" href="#">вернуться на главную</a>
+        <form class="col-12" ng-submit="registerNewUser()">
+            <label for="registerUsername">Логин</label>
+            <input class="col-12 form-control"
+                   placeholder="username"
+                   id="registerUsername"
+                   type="text"
+                   name="username"
+                   ng-model=userJSON.username>
 
+            <label for="registerPassword">Пароль</label>
+            <input class="col-12 form-control"
+                   placeholder="password"
+                   id="registerPassword"
+                   type="password"
+                   name="password"
+                   ng-model=userJSON.password>
 
-</body>
-</html>
+            <label for="registerFirstName">Имя</label>
+            <input class="col-12 form-control"
+                   placeholder="firstName"
+                   id="registerFirstName"
+                   type="text"
+                   name="firstName"
+                   ng-model=userJSON.firstName>
+
+            <label for="registerLastName">Фамилия</label>
+            <input class="col-12 form-control"
+                   placeholder="lastName"
+                   id="registerLastName"
+                   type="text"
+                   name="lastName"
+                   ng-model=userJSON.lastName>
+
+            <label for="registerEmail">Почтовый адрес</label>
+            <input class="col-12 form-control"
+                   placeholder="email@gmail.com"
+                   id="registerEmail"
+                   type="email"
+                   name="email"
+                   ng-model=userJSON.email>
+
+            <button class="col-12 btn btn-outline-primary" type="submit">Зарегистрировать</button>
+        </form>
+    </div>
+
+    <a class="col-12 btn btn-secondary" href="#">вернуться на главную</a>
+
+</div>

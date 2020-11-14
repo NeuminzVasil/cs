@@ -1,20 +1,29 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="cookstarter">
-<head>
+<div class="container" ng-controller="loginCtrl">
 
-</head>
+    <div class="row">
 
-<body ng-controller="loginCtrl">
+        <h3 class="col-12">Вход</h3>
 
-<!--вывод списока данных на страницу -->
-<h3>Вход</h3>
-<form ng-submit="tryToAuth()">
-    <input type="text" name="username" ng-model="user.username">
-    <input type="password" name="password" ng-model="user.password">
-    <button class="btn btn-outline-primary" type="submit">Войти</button>
-</form>
-<button class="btn btn-outline-secondary" ng-click="tryToLogout()">Выйти</button>
+        <form class="col-12" ng-submit="tryToAuth()">
+            <label for="loginUsername">Логин</label>
+            <input class="col-12"
+                   placeholder="username"
+                   id="loginUsername"
+                   type="text"
+                   name="username"
+                   ng-model="user.username">
 
+            <label for="loginPassword">Пароль</label>
+            <input class="col-12"
+                   placeholder="password"
+                   id="loginPassword"
+                   type="password"
+                   name="password"
+                   ng-model="user.password">
+            <button class="col-12 btn btn-outline-primary" type="submit">Войти</button>
+        </form>
+    </div>
 
-</body>
-</html>
+    <a class="col-12 btn btn-secondary" href="#">вернуться на главную</a>
+
+</div>
