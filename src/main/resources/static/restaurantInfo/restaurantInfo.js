@@ -1,12 +1,11 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $localStorage) {
-
+app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $localStorage, restaurantsFactory) {
 
     /**
-     * Получить все список всех ресторанов
+     * Показать сводную информацию о ресторане
      */
-    $scope.getAllRest = function () {
+    $scope.showRestaurantInfo = function () {
         // проверяем вошедшего пользователя (см loginController)
         // не забыть инжектнуть в контроллер параметр $localStorage
         if ($localStorage.currentUser) {
@@ -14,30 +13,30 @@ app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $lo
 
         }
 
-        $log.info($localStorage.currentUser);
+        $scope.restaurant = restaurantsFactory.restaurant;
 
-        $http.get('https://cookstarter-restaurant-service.herokuapp.com/restaurant/getAll', $http.user)
+        $http.get('https://cookstarter-restaurant-service.herokuapp.com/menu/get/'+ $scope.restaurant.id, $http.user)
             .then(function (response) {
-                $scope.restaurantsList = response.data;
-                $log.info(response.data);
-                // $window.location.href = '#!/';
+                $scope.menuList = response.data;
+                $log.info($scope.menuList);
             });
     };
     /**
-     * Автоматически получать список всех ресторанов при запуске страницы.
+     * Автоматически загрузить данные при старне страницы.
      */
-    $scope.getAllRest();
+    $scope.showRestaurantInfo();
 
     /**
-     * Получить картинку ресторана по ID (ID чего указываем, ID картинки или ресторана ?)
+     * Получить картинку ресторана по ID картинки
      * @returns {string}
      */
     $scope.getPicture = function (pictureId) {
         if (pictureId != null) {
-            return "https://picture-service.herokuapp.com/picture/restaurant/get/" + pictureId + "?Authorization=Bearer%20" + $localStorage.currentUser.token;
+            return "https://picture-service.herokuapp.com/picture/menu/get/" + pictureId + "?Authorization=Bearer%20" + $localStorage.currentUser.token;
         }
         return "assets/img/notFound.png";
     };
+
 
 });
 

@@ -1,26 +1,6 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.factory('restaurantsFactory', function () {
-    return {
-        restaurantsJSON:
-            {
-                dataCreate: new Date(),
-                orderNumber: null,
-                department: null,
-                comment: null,
-                invoiceNumber: null,
-                totalPrice: null,
-                sentToPrice: false,
-                sentToApprove: false,
-                sentToPurchase: false,
-                resolveDate: null,
-                customer: {id: null},
-                purchases: []
-            }
-    }
-});
-
-app.controller('welcomeCtrl', function ($log, $scope, $window, $http, $localStorage) {
+app.controller('welcomeCtrl', function ($log, $scope, $window, $http, $localStorage, restaurantsFactory) {
 
 
     /**
@@ -33,8 +13,6 @@ app.controller('welcomeCtrl', function ($log, $scope, $window, $http, $localStor
             $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
 
         }
-
-        $log.info($localStorage.currentUser);
 
         $http.get('https://cookstarter-restaurant-service.herokuapp.com/restaurant/getAll', $http.user)
             .then(function (response) {
@@ -62,10 +40,10 @@ app.controller('welcomeCtrl', function ($log, $scope, $window, $http, $localStor
     /**
      * Перейти на страницу ресторана по ID ресторана
      */
-    $scope.showRestaurantById = function (restaurantId) {
-        if (restaurantId != null) {
-            $log.info(restaurantId);
-            // получить детали по текущему ресторану и перейти на его страничку с отображением данных
+    $scope.showRestaurantById = function (restaurant) {
+        if (restaurant != null) {
+            restaurantsFactory.restaurant = restaurant;
+            $window.location.href = '#!/restaurantInfo'
         }
     };
 
