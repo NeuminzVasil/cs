@@ -8,6 +8,19 @@ app.filter('isEmpty', function () {
 });
 
 
+app.factory('restaurantsFactory', function () {
+    return {
+        restaurant:
+            {
+                id: null,
+                name: null,
+                description: null,
+                picture: null
+            }
+    }
+});
+
+
 
 
 
