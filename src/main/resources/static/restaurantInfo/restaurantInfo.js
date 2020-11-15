@@ -32,7 +32,7 @@ app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $lo
      */
     $scope.getPicture = function (pictureId) {
         if (pictureId != null) {
-            return "https://picture-service.herokuapp.com/picture/menu/get/" + pictureId + "?Authorization=Bearer%20" + $localStorage.currentUser.token;
+            return contextPathPictureService + "/picture/menu/get/" + pictureId + "?Authorization=Bearer%20" + $localStorage.currentUser.token;
         }
         return "assets/img/notFound.png";
     };

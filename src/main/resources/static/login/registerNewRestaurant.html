@@ -4,24 +4,45 @@
 
         <h3 class="col-12">Зарегистрировать новый ресторан</h3>
 
+
+
         <form class="col-12" ng-submit="registerNewRestaurant()">
-            <label for="registerUsername">Логин ресторана</label>
+
+            <label for="registerRestaurantName">Наименование ресторана</label>
             <input class="col-12"
-                   placeholder="username"
+                   placeholder="restaurant name"
+                   id="registerRestaurantName"
+                   type="text"
+                   name="username"
+                   ng-model=restaurantJSON.name>
+
+            <label for="registerRestaurantDescription">Описание ресторана</label>
+            <input class="col-12"
+                   placeholder="restaurant description"
+                   id="registerRestaurantDescription"
+                   type="text"
+                   name="username"
+                   ng-model=restaurantJSON.description>
+
+            <label for="registerUsername">Логин менеджера ресторана</label>
+            <input class="col-12"
+                   placeholder="manager name"
                    id="registerUsername"
                    type="text"
                    name="username"
-                   ng-model=restaurantJSON.username>
+                   ng-model=managerJSON.username>
 
-            <label for="registerPassword">Пароль ресторана</label>
+            <label for="registerPassword">Пароль менеджера ресторана</label>
             <input class="col-12"
-                   placeholder="password"
+                   placeholder="manager password"
                    id="registerPassword"
                    type="password"
                    name="password"
-                   ng-model=restaurantJSON.password>
-            <input hidden type="text" name="role" ng-model=restaurantJSON.role>
-            <button class="col-12 btn btn-outline-primary" type="submit">Зарегистрировать ресторан</button>
+                   ng-model=managerJSON.password>
+
+            <input hidden type="text" name="role" ng-model=managerJSON.role>
+
+            <button class="col-12 btn btn-outline-primary" type="submit">Зарегистрировать менеджера ресторана</button>
         </form>
     </div>
 
