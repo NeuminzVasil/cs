@@ -1,27 +1,41 @@
 <main id="main" ng-controller="welcomeCtrl">
 
     <!-- ======= HOW TO ORDER ======= -->
-    <section class="section">
+    <section class="section"
+             ng-controller="loginCtrl"
+             ng-show="!isLoggedIn()">
+
         <div class="container">
+
             <div class="row justify-content-center text-center mb-4">
-                <div class="col-5">
+                <div class="col-6">
                     <h3 class="h3 heading">Эй, время деньги!</h3>
                     <p>Закажи свое блюдо ЗАРАНЕЕ!</p>
                 </div>
             </div>
+
             <div class="row justify-content-center text-center mb-4">
-                <div class="col-5">
+                <div class="col-6">
                     <h3 class="h3 heading">Как заказать?</h3>
-                    <p>Сделай заказ блюда заранее на сайте</p>
-                    <p>или через приложение на мобиле.</p>
+                    <p>Сделай заказ блюда заранее на сайте или через приложение на мобиле.</p>
                 </div>
             </div>
-            <div class="row">
+
+            <div class="row row justify-content-center mb-4">
                 <div class="col-12 col-md-6">
                     <span class="la la-cube la-3x mb-4"></span>
-                    <h4 class="h4 mb-2">Сделай заказ блюда заранее на сайте.</h4>
+                    <h3 class="h3 mb-2">Сделай заказ блюда заранее на сайте.</h3>
                     <ul class="list-unstyled list-line">
-                        <li>Зарегистрируйся на сайте</li>
+                        <li> Зарегистрируйся на сайте пройдя по
+                            <a class="navbar-brand"
+                               href="#!/registerNewUser">
+                                ЭТОЙ</a> ссылке
+                        </li>
+                        <li> Войди на сайт пройдя по
+                            <a class="navbar-brand"
+                               href="#!/login">
+                                ЭТОЙ</a> ссылке
+                        </li>
                         <li>Выбери ресторан</li>
                         <li>Изучи меню</li>
                         <li>Сделай заказ</li>
@@ -29,9 +43,10 @@
                         <li>Получи готовое блюдо</li>
                     </ul>
                 </div>
+
                 <div class="col-12 col-md-6">
                     <span class="la la-mobile la-3x mb-4"></span>
-                    <h4 class="h4 mb-2">Сделай заказ через приложение на мобиле.</h4>
+                    <h3 class="h3 mb-2">Сделай заказ через приложение на мобиле.</h3>
                     <ul class="list-unstyled list-line">
                         <li>
                             <a class="navbar-brand"
@@ -44,12 +59,45 @@
                         <li>Получи готовое блюдо</li>
                     </ul>
                 </div>
+
             </div>
+
+            <div class="row justify-content-center text-center mb-4">
+                <div class="col-5">
+                    <h3 class="h3 heading">Для корпоративных клиентов.</h3>
+                </div>
+            </div>
+
+            <div class="row row justify-content-center mb-4">
+                <div class="col-12">
+                    <span class="la la-database la-3x mb-4"></span>
+                    <h3 class="h3">Зарегистрируй свой ресторан так.</h3>
+                    <ul class="list-unstyled list-line">
+                        <li> Зарегистрируйся на сайте пройдя по
+                            <a class="navbar-brand"
+                               href="#!/registerNewUser">
+                                ЭТОЙ</a> ссылке
+                        </li>
+                        <li> Войди на сайт пройдя по
+                            <a class="navbar-brand"
+                               href="#!/login">
+                                ЭТОЙ</a> ссылке
+                        </li>
+                        <li>Зарегистрируй свой ресторан по этой ссылке</li>
+                        <li>Наполни меню ресторана свой ресторан по этой ссылке</li>
+                        <li>Получи и обработай заказ</li>
+                        <li>Приступи к готовке блюда</li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </section><!-- End HOW TO ORDER -->
 
     <!-- ======= RESTAURANTS ======= -->
-    <section class="section site-portfolio">
+    <section class="section site-portfolio"
+             ng-controller="loginCtrl"
+             ng-show="isLoggedIn()">
         <div class="container">
 
             <div class="row">
