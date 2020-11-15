@@ -35,7 +35,8 @@
     <link href="assets/img/favicon.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=https://fonts.googleapis.com/css?family=Inconsolata:400,500,600,700|Raleway:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=https://fonts.googleapis.com/css?family=Inconsolata:400,500,600,700|Raleway:400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -52,11 +53,15 @@
 </head>
 <body>
 <!-- Header -->
-<header class="container">
+<header class="container-fluid">
 
-    <nav class="navbar navbar-light custom-navbar" ng-controller="loginCtrl">
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar"
+         style="background-color:  #374785"
+         ng-controller="loginCtrl">
+
         <div class="container">
-            <a class="navbar-brand" href="#!/">cookStarter ({{getUserName()}})</a>
+
+            <a class="navbar-brand" href="#!/">CookStarter ({{getUserName()}})</a>
 
             <ul class="navbar-nav ml-auto">
 
@@ -65,7 +70,7 @@
                 </li>
 
                 <li class="nav-item" ng-show="!isLoggedIn()">
-                    <a class="nav-link" href="#!/registerNewUser">Регистрация пользователя</a>
+                    <a class="nav-link" href="#!/registerNewUser">Регистрация клиента</a>
                 </li>
 
                 <li class="nav-item" ng-show="!isLoggedIn()">
@@ -80,8 +85,11 @@
                 </li>
 
             </ul>
+
         </div>
+
     </nav>
+
 </header>
 
 <!--Body -->
