@@ -1,15 +1,15 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $localStorage, restaurantsFactory) {
+app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $sessionStorage, restaurantsFactory) {
 
     /**
      * Показать сводную информацию о ресторане
      */
     $scope.showRestaurantInfo = function () {
         // проверяем вошедшего пользователя (см loginController)
-        // не забыть инжектнуть в контроллер параметр $localStorage
-        if ($localStorage.currentUser) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
+        // не забыть инжектнуть в контроллер параметр $sessionStorage
+        if ($sessionStorage.currentUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $sessionStorage.currentUser.token;
 
         }
 
@@ -34,7 +34,7 @@ app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $lo
             return contextPathPictureService + "/picture/menu/get/"
                 + pictureId
                 + "?Authorization=Bearer%20"
-                + $localStorage.currentUser.token;
+                + $sessionStorage.currentUser.token;
         }
         return "assets/img/notFound.png";
     };

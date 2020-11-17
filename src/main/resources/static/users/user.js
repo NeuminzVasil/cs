@@ -1,15 +1,15 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.controller('userCtrl', function ($log, $scope, $rootScope, $window, $http, $localStorage, userFactory) {
+app.controller('userCtrl', function ($log, $scope, $rootScope, $window, $http, $sessionStorage, userFactory) {
 
     /**
      * Показать сводную информацию о ресторане
      */
     $scope.showUserInfo = function () {
         // проверяем вошедшего пользователя (см loginController)
-        // не забыть инжектнуть в контроллер параметр $localStorage
-        if ($localStorage.currentUser) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
+        // не забыть инжектнуть в контроллер параметр $sessionStorage
+        if ($sessionStorage.currentUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $sessionStorage.currentUser.token;
         }
 
         userFactory.userInfo = JSON.parse(sessionStorage.getItem("userInfo"));

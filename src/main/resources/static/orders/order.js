@@ -1,15 +1,15 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.controller('orderCtrl', function ($log, $scope, $window, $http, $localStorage, orderFactory) {
+app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStorage, orderFactory) {
 
     /**
      * Показать сводную информацию о ресторане
      */
     $scope.showOrder = function () {
         // проверяем вошедшего пользователя (см loginController)
-        // не забыть инжектнуть в контроллер параметр $localStorage
-        if ($localStorage.currentUser) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
+        // не забыть инжектнуть в контроллер параметр $sessionStorage
+        if ($sessionStorage.currentUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $sessionStorage.currentUser.token;
         }
 
 /*        $scope.order = orderFactory.order;*/
@@ -33,7 +33,7 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $localStorag
             return contextPathPictureService + "/picture/menu/get/"
                 + pictureId
                 + "?Authorization=Bearer%20"
-                + $localStorage.currentUser.token;
+                + $sessionStorage.currentUser.token;
         }
         return "assets/img/notFound.png";
     };

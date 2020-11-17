@@ -1,6 +1,6 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, $localStorage, userFactory) {
+app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, $sessionStorage, userFactory) {
 
     /**
      * получить токен по логину и паролю
@@ -10,7 +10,7 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
             if (response.data.token) {
 
                 $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-                $localStorage.currentUser = {username: $scope.user.username, token: response.data.token};
+                $sessionStorage.currentUser = {username: $scope.user.username, token: response.data.token};
 
                 userFactory.userInfo.id = response.data.userId;
                 userFactory.userInfo.restaurantId = response.data.restaurantId;
@@ -30,7 +30,7 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
      * выход из системы
      */
     $scope.tryToLogout = function () {
-        delete $localStorage.currentUser;
+        delete $sessionStorage.currentUser;
         $http.defaults.headers.common.Authorization = '';
         $window.location.href = '#!/';
     };
@@ -40,7 +40,7 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
      * @returns {boolean}
      */
     $scope.isLoggedIn = function () {
-        if ($localStorage.currentUser) return true;
+        if ($sessionStorage.currentUser) return true;
         return false;
     }
 
@@ -49,7 +49,7 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
      * @returns {null|$scope.user.username}
      */
     $scope.getUserName = function () {
-        if ($localStorage.currentUser) return $localStorage.currentUser.username;
+        if ($sessionStorage.currentUser) return $sessionStorage.currentUser.username;
         return null;
     }
 
