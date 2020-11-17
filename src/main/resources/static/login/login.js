@@ -1,6 +1,6 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.controller('loginCtrl', function ($log, $scope, $window, $http, $localStorage) {
+app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, $localStorage, userFactory) {
 
     /**
      * получить токен по логину и паролю
@@ -8,15 +8,21 @@ app.controller('loginCtrl', function ($log, $scope, $window, $http, $localStorag
     $scope.tryToAuth = function () {
         $http.post(contextPathUserService + '/auth', $scope.user).then(function success(response) {
             if (response.data.token) {
+
                 $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-                $log.info(response.data.token);
                 $localStorage.currentUser = {username: $scope.user.username, token: response.data.token};
+
+                userFactory.userInfo.id = response.data.userId;
+                userFactory.userInfo.restaurantId = response.data.restaurantId;
+
+                sessionStorage.setItem("userInfo", JSON.stringify(userFactory.userInfo));
+
+                $log.info(sessionStorage.getItem("userInfo"));
+
                 $window.location.href = '#!/';
             }
         }, function error(response) {
-
             $log.info(response);
-
         });
     };
 
@@ -51,15 +57,16 @@ app.controller('loginCtrl', function ($log, $scope, $window, $http, $localStorag
      * Регистрация нового клиента
      */
     $scope.registerNewUser = function () {
-        $http.post(contextPathUserService + '/reg/customer', $scope.userJSON)
+        userFactory.userInfo = $scope.userInfo;
+        sessionStorage.setItem("userInfo", userFactory.userInfo);
+        $log.info(userFactory.userInfo);
+/*        $http.post(contextPathUserService + '/reg', userFactory.userInfo)
             .then(function success(response) {
-                $log.info($scope.userJSON);
                 $window.location.href = '#!/';
-                $log.info(response);
 
             }, function error(response) {
                 $log.info(response);
-            });
+            });*/
     };
 
     /**
@@ -69,8 +76,6 @@ app.controller('loginCtrl', function ($log, $scope, $window, $http, $localStorag
 
         $http.post(contextPathRestaurantService + '/restaurant/add', $scope.restaurantJSON)
             .then(function success(response) {
-                $log.info($scope.restaurantJSON);
-                $log.info(response);
                 $scope.managerJSON.id = response; // todo получить id ресторана
             }, function error(response) {
                 $log.info(response);
@@ -79,10 +84,7 @@ app.controller('loginCtrl', function ($log, $scope, $window, $http, $localStorag
         $scope.managerJSON.role = "RESTAURANT_ADMIN";
         $http.post(contextPathUserService + '/reg/restaurant', $scope.managerJSON)
             .then(function success(response) {
-                $log.info($scope.managerJSON);
                 $window.location.href = '#!/';
-                $log.info(response);
-
             }, function error(response) {
                 $log.info(response);
             });

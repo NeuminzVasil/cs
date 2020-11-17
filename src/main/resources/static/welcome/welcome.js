@@ -14,10 +14,9 @@ app.controller('welcomeCtrl', function ($log, $scope, $window, $http, $localStor
 
         }
 
-        $http.get('https://cookstarter-restaurant-service.herokuapp.com/restaurant/getAll', $http.user)
+        $http.get(contextPathRestaurantService + '/restaurant/getAll', $http.user)
             .then(function (response) {
                 $scope.restaurantsList = response.data;
-                $log.info(response.data);
                 // $window.location.href = '#!/';
             });
     };

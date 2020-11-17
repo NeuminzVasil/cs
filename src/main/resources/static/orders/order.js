@@ -1,29 +1,28 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $localStorage, restaurantsFactory) {
+app.controller('orderCtrl', function ($log, $scope, $window, $http, $localStorage, orderFactory) {
 
     /**
      * Показать сводную информацию о ресторане
      */
-    $scope.showRestaurantInfo = function () {
+    $scope.showOrder = function () {
         // проверяем вошедшего пользователя (см loginController)
         // не забыть инжектнуть в контроллер параметр $localStorage
         if ($localStorage.currentUser) {
             $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
-
         }
 
-        $scope.restaurant = restaurantsFactory.restaurant;
+/*        $scope.order = orderFactory.order;*/
 
-        $http.get(contextPathRestaurantService + '/menu/get/'+ $scope.restaurant.id, $http.user)
+        $http.get(contextPathOrderService + '/orders/get/27', $http.user)
             .then(function (response) {
-                $scope.menuList = response.data;
+                $scope.order = response.data;
             });
     };
     /**
      * Автоматически загрузить данные при старне страницы.
      */
-    $scope.showRestaurantInfo();
+    $scope.showOrder();
 
     /**
      * Получить картинку ресторана по ID картинки
@@ -38,7 +37,6 @@ app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $lo
         }
         return "assets/img/notFound.png";
     };
-
 
 });
 

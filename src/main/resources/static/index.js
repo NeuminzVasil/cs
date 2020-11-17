@@ -28,6 +28,14 @@ app.config(function ($routeProvider) {
             templateUrl: 'restaurantInfo/restaurantInfo.html',
             controller: 'restaurantInfoCtrl'
         })
+        .when('/order', {
+            templateUrl: 'orders/order.html',
+            controller: 'orderCtrl'
+        })
+        .when('/user', {
+            templateUrl: 'users/user.html',
+            controller: 'userCtrl'
+        })
         .otherwise({template: '<h1>404 Error (путь не найден)</h1>'})
 });
 

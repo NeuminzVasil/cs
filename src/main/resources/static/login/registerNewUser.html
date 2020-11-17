@@ -11,7 +11,7 @@
                    id="registerUsername"
                    type="text"
                    name="username"
-                   ng-model=userJSON.username>
+                   ng-model=userInfo.username>
 
             <label for="registerPassword">Пароль</label>
             <input class="col-12 form-control"
@@ -19,7 +19,7 @@
                    id="registerPassword"
                    type="password"
                    name="password"
-                   ng-model=userJSON.password>
+                   ng-model=userInfo.password>
 
             <label for="registerFirstName">Имя</label>
             <input class="col-12 form-control"
@@ -27,7 +27,7 @@
                    id="registerFirstName"
                    type="text"
                    name="firstName"
-                   ng-model=userJSON.firstName>
+                   ng-model=userInfo.firstName>
 
             <label for="registerLastName">Фамилия</label>
             <input class="col-12 form-control"
@@ -35,7 +35,7 @@
                    id="registerLastName"
                    type="text"
                    name="lastName"
-                   ng-model=userJSON.lastName>
+                   ng-model=userInfo.lastName>
 
             <label for="registerEmail">Почтовый адрес</label>
             <input class="col-12 form-control"
@@ -43,7 +43,12 @@
                    id="registerEmail"
                    type="email"
                    name="email"
-                   ng-model=userJSON.email>
+                   ng-model=userInfo.email>
+
+            <input hidden
+                   type="text"
+                   name="role"
+                   ng-model=userInfo.role>
 
             <button class="col-12 btn btn-outline-primary" type="submit">Зарегистрировать</button>
         </form>
