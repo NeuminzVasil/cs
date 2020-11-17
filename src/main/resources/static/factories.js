@@ -23,11 +23,8 @@ app.factory('orderFactory', function () {
     return {
         order:
             {
-                id: 21,
-                customerId: 42,
-                restaurantId: 24,
-                status: "SAVED",
-                dateCreated: "04-10-2020 13:11:41.800+0300",
+                customerId: null,
+                restaurantId: null,
                 dishes: {
                     1: {
                         id: 62,
@@ -44,18 +41,6 @@ app.factory('orderFactory', function () {
     }
 });
 
-app.factory('userFactory', function () {
-    return {
-        userInfo: {
-            id: null,
-            firstname: null,
-            lastname: null,
-            email: null,
-            role: null,
-            restaurantId: null
-        }
-    }
-});
 
 
 

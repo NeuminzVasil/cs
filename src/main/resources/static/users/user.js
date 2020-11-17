@@ -1,31 +1,33 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.controller('userCtrl', function ($log, $scope, $rootScope, $window, $http, $sessionStorage, userFactory) {
+app.controller('userCtrl', function ($log, $scope, $http, $sessionStorage) {
 
     /**
-     * Показать сводную информацию о ресторане
+     * Показать сводную информацию о пользователе
      */
     $scope.showUserInfo = function () {
+
         // проверяем вошедшего пользователя (см loginController)
         // не забыть инжектнуть в контроллер параметр $sessionStorage
         if ($sessionStorage.currentUser) {
             $http.defaults.headers.common.Authorization = 'Bearer ' + $sessionStorage.currentUser.token;
         }
 
-        userFactory.userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+        // отображаем на страницу данные о пользователе
+        $scope.userID = sessionStorage.getItem("userID");
+        $scope.userMail = sessionStorage.getItem("userMail");
+        $scope.userFirstName = sessionStorage.getItem("userFirstName");
+        $scope.userLastName = sessionStorage.getItem("userLastName");
+        $scope.restaurantId = sessionStorage.getItem("restaurantId");
 
-        $scope.userInfo = userFactory.userInfo;
-        $log.info($scope.userInfo);
-
-/*        $http.get(contextPathOrderService
-                    + '/orders/get/customer/'
-                    + userFactory.userInfo.id,
-                    $http.user)
+        // получаем данные (в $scope.allUserOrders) о всех заказах пользователя.
+        // $scope.userID = 55; // todo обязательно это удалить после создания заказов для себя.
+        $http.get(contextPathOrderService + '/orders/get/customer/' + $scope.userID, $http.user)
             .then(function (response) {
                 $scope.allUserOrders = response.data;
-                $log.info($scope.allUserOrders);
-            });*/
+            });
     };
+
     /**
      * Автоматически загрузить данные при старне страницы.
      */

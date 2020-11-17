@@ -1,29 +1,35 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, $sessionStorage, userFactory) {
+app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, $sessionStorage) {
 
     /**
      * получить токен по логину и паролю
      */
     $scope.tryToAuth = function () {
-        $http.post(contextPathUserService + '/auth', $scope.user).then(function success(response) {
-            if (response.data.token) {
+        $http.post(contextPathUserService + '/auth', $scope.user)
+            .then(function (response) {
+                if (response.data.token) {
 
-                $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-                $sessionStorage.currentUser = {username: $scope.user.username, token: response.data.token};
+                    // запрашиваем токен пользователя
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
+                    $sessionStorage.currentUser = {username: $scope.user.username, token: response.data.token};
 
-                userFactory.userInfo.id = response.data.userId;
-                userFactory.userInfo.restaurantId = response.data.restaurantId;
+                    // сохраняем id пользователя в фабрику
+                    sessionStorage.setItem("userID", response.data.userId + 1);
 
-                sessionStorage.setItem("userInfo", JSON.stringify(userFactory.userInfo));
+                    // сохраняем привязку id ресторана в фабрику
+                    sessionStorage.setItem("restaurantId", response.data.restaurantId);
 
-                $log.info(sessionStorage.getItem("userInfo"));
+                    // внедряем персональные данные о пользователе в sessionStorage
+                    $scope.injectUserInfo();
 
-                $window.location.href = '#!/';
-            }
-        }, function error(response) {
-            $log.info(response);
-        });
+                    // переходим на главную страницу
+                    $window.location.href = '#!/';
+                }
+            })
+            .catch(function (response) {
+                alert(response);
+            });
     };
 
     /**
@@ -45,28 +51,49 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
     }
 
     /**
-     * Получить имя пользователя
+     * Получить Login пользователя
      * @returns {null|$scope.user.username}
      */
-    $scope.getUserName = function () {
+    $scope.getUserLogin = function () {
         if ($sessionStorage.currentUser) return $sessionStorage.currentUser.username;
         return null;
+    }
+
+    /**
+     * Получить информацию о пользователе
+     * @returns {null|$scope.user.username}
+     */
+    $scope.injectUserInfo = function () {
+
+        if ($sessionStorage.currentUser) {
+            // запрашиваем информацию о пользователе
+            $http.get(contextPathUserService + '/users/info/'
+                + sessionStorage.getItem("userID"),
+                $http.user)
+                .then(function (response) {
+                    // сохраняем информацию о пользователе в фабрику
+                    sessionStorage.setItem("userFirstName", response.data.firstName);
+                    sessionStorage.setItem("userLastName", response.data.lastName);
+                    sessionStorage.setItem("userMail", response.data.email);
+                    sessionStorage.setItem("userInfo", JSON.stringify(response.data));
+                    $log.info(JSON.parse(sessionStorage.getItem("userInfo")));
+                });
+        }
+        return JSON.parse(sessionStorage.getItem("userInfo"));
     }
 
     /**
      * Регистрация нового клиента
      */
     $scope.registerNewUser = function () {
-        userFactory.userInfo = $scope.userInfo;
-        sessionStorage.setItem("userInfo", userFactory.userInfo);
-        $log.info(userFactory.userInfo);
-/*        $http.post(contextPathUserService + '/reg', userFactory.userInfo)
-            .then(function success(response) {
-                $window.location.href = '#!/';
+        sessionStorage.setItem("userInfo", $scope.userInfo);
+        /*        $http.post(contextPathUserService + '/reg', userFactory.userInfo)
+                    .then(function success(response) {
+                        $window.location.href = '#!/';
 
-            }, function error(response) {
-                $log.info(response);
-            });*/
+                    }, function error(response) {
+                        $log.info(response);
+                    });*/
     };
 
     /**
