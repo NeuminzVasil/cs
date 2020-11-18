@@ -1,5 +1,9 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
-
+let orderTemp = {
+    customerId: null,
+    restaurantId: null,
+    dishes: {}
+};
 
 app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStorage, orderFactory) {
 
@@ -38,50 +42,47 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
         return "assets/img/notFound.png";
     };
 
-    $scope.addToOrder = function (restaurant, dish) {
-        /*        let orderTemp = {customerId:null,
-                    restaurantId:null,
-                dishes: [{2 : {price: dish.price, quantity: 2}}]};*/
-        let orderTemp = {
-            customerId: null,
-            restaurantId: null,
-            dishes: []
-        };
-        let dishIDTemp = dish.id;
-        let quantityTemp = 0;
-
-        $log.info(sessionStorage.getItem("userID"));
-        $log.info(restaurant.id);
-        $log.info(dish.id);
-        $log.info(dish.price);
+    $scope.addDishToTempOrder = function (restaurant, dish) {
 
         // заполняем временный шаблон заказа данными.
         orderTemp.customerId = sessionStorage.getItem("userID");
         orderTemp.restaurantId = restaurant.id;
 
-        // добавляем временный диш к заказу
-        orderTemp.dishes[dishIDTemp] = {price: dish.price, quantity: quantityTemp + 1};
+        // добавляем dish к заказу или увеличиваем количество ранее добавленного
+        if (orderTemp.dishes.hasOwnProperty(dish.id))
+            orderTemp.dishes[dish.id].quantity++;
+        else
+            orderTemp.dishes[dish.id] = {price: dish.price, quantity: 1};
+
+        $log.info(orderTemp);
+
+        // сохраняем данные о новом заказе в sessionStorage
+        sessionStorage.setItem("orderJSON", JSON.stringify(orderTemp));
+
+        /*        $http.post(contextPathOrderService + '/orders/add', $scope.restaurantJSON)
+                    .then(function success(response) {
+                        $scope.managerJSON.id = response;
+                    }, function error(response) {
+                        $log.info(response);
+                    });*/
 
         // сохраняем данные о новом заказе в sessionStorage
         // sessionStorage.setItem("orderJSON", JSON.stringify(orderFactory));
         // получаем данные о новом заказе в sessionStorage
         // orderTemp = JSON.parse(sessionStorage.getItem("orderJSON"));
 
-        $log.info(orderTemp);
 
-        /*        let indexX = invoiceFactory.invoiceJSON.purchases.findIndex((x) =>
-                    x.nomenclature === nomenclature);
+        /*        orderTemp.customerId = sessionStorage.getItem("userID");
+                orderTemp.restaurantId = restaurant.id;
 
-                if (indexX < 0) invoiceFactory.invoiceJSON.purchases.push({
-                    nomenclature,
-                    "count": 1,
-                    "approver": null,
-                    "resolvingDate": null,
-                    "comment": null,
-                    "buyingPrice": nomenclature.price
-                });
-                // добавить в JSON колличесвто + 1
-                else invoiceFactory.invoiceJSON.purchases[indexX].count++;*/
+                // setting the values
+                myMap.set(dish.id, {restaurantID: restaurant.id, price: dish.price});
+
+                // getting the values
+                myMap.get(keyString);    // "value associated with 'a string'"
+
+                $log.info(myMap);
+                $log.info(orderTemp);*/
 
     }
 
