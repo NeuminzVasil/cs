@@ -42,7 +42,7 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
         // отчистка sessionStorage при выходе
         $scope.sessionStorageCleaning();
         $http.defaults.headers.common.Authorization = '';
-        $window.location.href = '#!/';
+        $window.location.href = '#';
     };
 
     /**

@@ -49,6 +49,9 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
      */
     $scope.addDishToTempOrder = function (restaurant, dish) {
 
+        // берем актуальное состояние корзины из sessionStorage и сохраняем во временную переменную
+        orderTemp = JSON.parse(sessionStorage.getItem("orderJSON"));
+
         // заполняем временный шаблон заказа данными.
         orderTemp.customerId = sessionStorage.getItem("userID");
         orderTemp.restaurantId = restaurant.id;
@@ -62,12 +65,6 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
         // сохраняем данные о новом заказе в sessionStorage
         sessionStorage.setItem("orderJSON", JSON.stringify(orderTemp));
 
-        /*        $http.post(contextPathOrderService + '/orders/add', $scope.restaurantJSON)
-                    .then(function success(response) {
-                        $scope.managerJSON.id = response;
-                    }, function error(response) {
-                        $log.info(response);
-                    });*/
 
         // получаем данные о новом заказе в sessionStorage
         // orderTemp = JSON.parse(sessionStorage.getItem("orderJSON"));
@@ -96,12 +93,22 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
         orderTemp = JSON.parse(sessionStorage.getItem("orderJSON"));
 
         // добавляем dish к заказу или увеличиваем количество ранее добавленного
-        if (orderTemp.dishes.hasOwnProperty(dish.id) && orderTemp.dishes[dish.id].quantity > 0 )
+        if (orderTemp.dishes.hasOwnProperty(dish.id) && orderTemp.dishes[dish.id].quantity > 0)
             orderTemp.dishes[dish.id].quantity--;
 
         // сохраняем данные о новом заказе в sessionStorage
         sessionStorage.setItem("orderJSON", JSON.stringify(orderTemp));
 
+    }
+
+    $scope.submitOrder = function () {
+        $http.post(contextPathOrderService + '/orders/add', JSON.parse(sessionStorage.getItem("orderJSON")))
+            .then(function (response) {
+                $log.info(response.data);
+            })
+            .catch(function (response) {
+                alert(response);
+            });
     }
 
 });
