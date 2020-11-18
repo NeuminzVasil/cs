@@ -8,6 +8,13 @@
             </div>
 
             <div class="row">
+                <button type="button"
+                        class="col-12 btn btn-sm btn-primary"
+                        ng-click="submitOrder()">Оформить заказ
+                </button>
+            </div>
+
+            <div class="row">
                 <p class="col-12">order.customerId: {{order.customerId}}</p>
                 <p class="col-12">order.status: {{order.status}}</p>
                 <p class="col-12">Заказ создан: {{order.dateCreated}}</p>
@@ -41,13 +48,6 @@
 
                 </div>
 
-            </div>
-
-            <div class="row">
-                <button type="button"
-                        class="btn btn-sm btn-outline-primary"
-                        ng-click="submitOrder()">Оформить заказ
-                </button>
             </div>
 
         </div>
