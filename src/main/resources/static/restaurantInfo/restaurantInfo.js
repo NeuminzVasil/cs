@@ -10,12 +10,12 @@ app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $se
         // не забыть инжектнуть в контроллер параметр $sessionStorage
         if ($sessionStorage.currentUser) {
             $http.defaults.headers.common.Authorization = 'Bearer ' + $sessionStorage.currentUser.token;
-
         }
+
 
         $scope.restaurant = restaurantsFactory.restaurant;
 
-        $http.get(contextPathRestaurantService + '/menu/get/'+ $scope.restaurant.id, $http.user)
+        $http.get(contextPathRestaurantService + '/menu/get/' + $scope.restaurant.id, $http.user)
             .then(function (response) {
                 $scope.menuList = response.data;
             });
@@ -39,6 +39,14 @@ app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $se
         return "assets/img/notFound.png";
     };
 
+    $scope.countIdOrder = function (dish) {
+        if (JSON.parse(sessionStorage.getItem("orderJSON")).dishes.hasOwnProperty(dish.id))
+            return JSON.parse(sessionStorage.getItem("orderJSON")).dishes[dish.id].quantity;
+        else
+            return 0;
+
+        // $scope.countIdOrder = JSON.parse(sessionStorage.getItem("orderJSON"));
+    }
 
 });
 

@@ -42,6 +42,11 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
         return "assets/img/notFound.png";
     };
 
+    /**
+     * добавить блюдо в корзину
+     * @param restaurant
+     * @param dish
+     */
     $scope.addDishToTempOrder = function (restaurant, dish) {
 
         // заполняем временный шаблон заказа данными.
@@ -54,8 +59,6 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
         else
             orderTemp.dishes[dish.id] = {price: dish.price, quantity: 1};
 
-        $log.info(orderTemp);
-
         // сохраняем данные о новом заказе в sessionStorage
         sessionStorage.setItem("orderJSON", JSON.stringify(orderTemp));
 
@@ -66,8 +69,6 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
                         $log.info(response);
                     });*/
 
-        // сохраняем данные о новом заказе в sessionStorage
-        // sessionStorage.setItem("orderJSON", JSON.stringify(orderFactory));
         // получаем данные о новом заказе в sessionStorage
         // orderTemp = JSON.parse(sessionStorage.getItem("orderJSON"));
 
@@ -83,6 +84,23 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
 
                 $log.info(myMap);
                 $log.info(orderTemp);*/
+
+    }
+
+    /**
+     * удалить блюдо из корзины
+     * @param dish
+     */
+    $scope.removeDishToTempOrder = function (dish) {
+
+        orderTemp = JSON.parse(sessionStorage.getItem("orderJSON"));
+
+        // добавляем dish к заказу или увеличиваем количество ранее добавленного
+        if (orderTemp.dishes.hasOwnProperty(dish.id) && orderTemp.dishes[dish.id].quantity > 0 )
+            orderTemp.dishes[dish.id].quantity--;
+
+        // сохраняем данные о новом заказе в sessionStorage
+        sessionStorage.setItem("orderJSON", JSON.stringify(orderTemp));
 
     }
 

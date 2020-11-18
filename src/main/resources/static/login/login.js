@@ -23,6 +23,9 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
                     // внедряем персональные данные о пользователе в sessionStorage
                     $scope.injectUserInfo();
 
+                    // Инициализация пустой корзины при входе
+                    $scope.orderInitialize()
+
                     // переходим на главную страницу
                     $window.location.href = '#!/';
                 }
@@ -36,7 +39,8 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
      * выход из системы
      */
     $scope.tryToLogout = function () {
-        delete $sessionStorage.currentUser;
+        // отчистка sessionStorage при выходе
+        $scope.sessionStorageCleaning();
         $http.defaults.headers.common.Authorization = '';
         $window.location.href = '#!/';
     };
@@ -116,6 +120,24 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
                 $log.info(response);
             });
     };
+
+    /**
+     * Инициализация пустой корзины при входе
+     */
+    $scope.orderInitialize = function () {
+        sessionStorage.setItem("orderJSON", JSON.stringify({
+            customerId: null,
+            restaurantId: null,
+            dishes: {}
+        }));
+    }
+
+    /**
+     * отчистка sessionStorage при выходе
+     */
+    $scope.sessionStorageCleaning = function () {
+        sessionStorage.clear();
+    }
 });
 
 
