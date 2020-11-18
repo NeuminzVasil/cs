@@ -32,6 +32,17 @@ app.controller('userCtrl', function ($log, $scope, $http, $sessionStorage) {
      */
     $scope.showUserInfo();
 
+    /**
+     *  Получить данные по заказу
+     */
+    $scope.getOrderDetails = function (order) {
+
+        // получаем данные (в $scope.allUserOrders) о всех заказах пользователя.
+        $http.get(contextPathOrderService + '/orders/get/customer/' + $scope.userID, $http.user)
+            .then(function (response) {
+                $scope.allUserOrders = response.data;
+            });
+    }
 });
 
 

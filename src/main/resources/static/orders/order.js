@@ -17,10 +17,7 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
             $http.defaults.headers.common.Authorization = 'Bearer ' + $sessionStorage.currentUser.token;
         }
 
-        $http.get(contextPathOrderService + '/orders/get/31', $http.user) // todo на нолевом этапе корзина формируется на стороне фронта и ID у нее нет. поэтому брать инфо нужно не из базы а из локального хранилища
-            .then(function (response) {
-                $scope.order = response.data;
-            });
+        $scope.order = JSON.parse(sessionStorage.getItem("orderJSON"));
 
     };
     /**
@@ -105,6 +102,19 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
         $http.post(contextPathOrderService + '/orders/add', JSON.parse(sessionStorage.getItem("orderJSON")))
             .then(function (response) {
                 $log.info(response.data);
+
+                alert("Заказ сформирован и ожидает оплаты. Мы перенаправим Вас на страницу Ваших заказов");
+
+                // в случае удачно переданного заказа в сторону бекэда нужно отчистить текущий заказ
+                orderTemp = {
+                    customerId: null,
+                    restaurantId: null,
+                    dishes: {}
+                };
+                sessionStorage.setItem("orderJSON", JSON.stringify(orderTemp));
+
+                $window.location.href = '#!/user';
+
             })
             .catch(function (response) {
                 alert(response);
