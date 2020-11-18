@@ -21,24 +21,19 @@ app.factory('restaurantsFactory', function () {
 
 app.factory('orderFactory', function () {
     return {
-        order:
-            {
                 customerId: null,
                 restaurantId: null,
                 dishes: {
-                    1: {
-                        id: 62,
+                    78: {
                         price: 0.99,
                         quantity: 6
                     },
-                    2: {
-                        id: 63,
+                    77: {
                         price: 1.99,
                         quantity: 3
                     }
                 }
             }
-    }
 });
 
 

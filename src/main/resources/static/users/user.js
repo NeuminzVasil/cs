@@ -21,7 +21,6 @@ app.controller('userCtrl', function ($log, $scope, $http, $sessionStorage) {
         $scope.restaurantId = sessionStorage.getItem("restaurantId");
 
         // получаем данные (в $scope.allUserOrders) о всех заказах пользователя.
-        // $scope.userID = 55; // todo обязательно это удалить после создания заказов для себя.
         $http.get(contextPathOrderService + '/orders/get/customer/' + $scope.userID, $http.user)
             .then(function (response) {
                 $scope.allUserOrders = response.data;

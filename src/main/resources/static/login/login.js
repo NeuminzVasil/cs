@@ -15,7 +15,7 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
                     $sessionStorage.currentUser = {username: $scope.user.username, token: response.data.token};
 
                     // сохраняем id пользователя в фабрику
-                    sessionStorage.setItem("userID", response.data.userId + 1);
+                    sessionStorage.setItem("userID", response.data.userId);
 
                     // сохраняем привязку id ресторана в фабрику
                     sessionStorage.setItem("restaurantId", response.data.restaurantId);
@@ -76,7 +76,7 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
                     sessionStorage.setItem("userLastName", response.data.lastName);
                     sessionStorage.setItem("userMail", response.data.email);
                     sessionStorage.setItem("userInfo", JSON.stringify(response.data));
-                    $log.info(JSON.parse(sessionStorage.getItem("userInfo")));
+                    // $log.info(JSON.parse(sessionStorage.getItem("userInfo")));
                 });
         }
         return JSON.parse(sessionStorage.getItem("userInfo"));
