@@ -90,14 +90,18 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
      * Регистрация нового клиента
      */
     $scope.registerNewUser = function () {
-        sessionStorage.setItem("userInfo", $scope.userInfo);
-        /*        $http.post(contextPathUserService + '/reg', userFactory.userInfo)
-                    .then(function success(response) {
-                        $window.location.href = '#!/';
 
-                    }, function error(response) {
-                        $log.info(response);
-                    });*/
+        sessionStorage.setItem("userInfo", JSON.stringify($scope.userInfo));
+
+        $http.post(contextPathUserService + '/reg', JSON.parse(sessionStorage.getItem("userInfo")))
+            .then(function success(response) {
+                $log.info(response);
+                $window.location.href = '#!/';
+
+            }).catch(function (response) {
+            alert(response);
+        });
+
     };
 
     /**
