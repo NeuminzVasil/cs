@@ -1,4 +1,4 @@
-<main >
+<main>
 
     <!-- ======= Детали заказа ======= -->
     <section class="section site-portfolio">
@@ -8,13 +8,18 @@
             </div>
 
             <div class="row">
-                <a class="col-12 btn btn-primary" href="#!/user">вернуться на страницу заказов</a>
+                <button type="button"
+                        class="col-6 btn btn-sm btn-success"
+                        ng-click="payOrder(orderDetails.id)">Оплатить заказ
+                </button>
+
+                <a class="col-6 btn btn-primary" href="#!/user">вернуться на страницу заказов</a>
             </div>
 
             <div class="row">
                 <p class="col-12">order.customerId: {{orderDetails.customerId}}</p>
                 <p class="col-12">order.status: {{orderDetails.status}}</p>
-                <p class="col-12">Заказ создан: {{orderDetails.dateCreated  | date: "yyyy.MM.dd hh:MM"}}</p>
+                <p class="col-12">Заказ создан: {{orderDetails.dateCreated | date: "yyyy.MM.dd hh:MM"}}</p>
             </div>
 
             <div class="row">
@@ -41,7 +46,8 @@
             </div>
 
             <div class="row">
-                <a class="col-12 btn btn-primary" href="#!/user">вернуться на страницу заказов</a>
+                <a class="col-6 btn btn-success" href="#!/user">Оплатить заказ</a>
+                <a class="col-6 btn btn-primary" href="#!/user">вернуться на страницу заказов</a>
             </div>
 
         </div>

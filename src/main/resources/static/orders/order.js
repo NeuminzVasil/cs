@@ -99,6 +99,9 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
 
     }
 
+    /**
+     * подтвердить заказ
+     */
     $scope.submitOrder = function () {
         $http.post(contextPathOrderService + '/orders/add', JSON.parse(sessionStorage.getItem("orderJSON")))
             .then(function (response) {
@@ -121,6 +124,30 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
                 alert(response);
             });
     }
+
+    /**
+     * Оплатить заказ
+     */
+    $scope.payOrder = function (id) {
+
+        let payJSON = {
+            id: id,
+            status: "PAID"
+        }
+
+        // меняем статус на "Оплачено"
+        $http.post(contextPathOrderService + '/orders/set-status', payJSON, $http.user)
+            .then(function (response) {
+                $scope.restaurantsList = response.data;
+                $window.location.href = '#!/user';
+                alert("Заказ оплачен");
+            })
+            .catch(function (response) {
+                alert(response.data.error);
+            });
+
+    }
+
 
 });
 
