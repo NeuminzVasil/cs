@@ -1,0 +1,50 @@
+<main >
+
+    <!-- ======= Детали заказа ======= -->
+    <section class="section site-portfolio">
+        <div class="container">
+            <div class="row">
+                <h1 class="col-12">Список блюд в заказе № {{orderDetails.id}}</h1>
+            </div>
+
+            <div class="row">
+                <a class="col-12 btn btn-primary" href="#!/user">вернуться на страницу заказов</a>
+            </div>
+
+            <div class="row">
+                <p class="col-12">order.customerId: {{orderDetails.customerId}}</p>
+                <p class="col-12">order.status: {{orderDetails.status}}</p>
+                <p class="col-12">Заказ создан: {{orderDetails.dateCreated  | date: "yyyy.MM.dd hh:MM"}}</p>
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-6 col-md-4 col-lg-4 mb-4"
+                     ng-repeat="dish in orderDetails.dishes">
+
+                    <div class="card mb-4 shadow-sm">
+
+                        <img class="img-fluid" width="100%" height="225" ng-src="{{getPicture(dish.pictureId)}}">
+
+                        <div class="card-body">
+
+                            <p class="card-text">id {{dish.id}}</p>
+                            <p class="card-text">Количество {{dish.quantity}}</p>
+                            <p class="card-text">Цена {{dish.price}} р.</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <a class="col-12 btn btn-primary" href="#!/user">вернуться на страницу заказов</a>
+            </div>
+
+        </div>
+    </section> <!-- End  Works Section -->
+
+</main>

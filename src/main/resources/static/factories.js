@@ -19,9 +19,30 @@ app.factory('restaurantsFactory', function () {
 
 app.factory('orderFactory', function () {
     return {
-        customerId: null,
-        restaurantId: null,
-        dishes: {}
+        order: {
+            id: 35,
+            customerId: 3,
+            restaurantId: 2,
+            status: null,
+            dateCreated: null,
+            dishes: {
+                76: {
+                    id: 56,
+                    price: 67.55,
+                    quantity: 3
+                },
+                77: {
+                    id: 57,
+                    price: 88.99,
+                    quantity: 4
+                },
+                78: {
+                    id: 58,
+                    price: 120.50,
+                    quantity: 2
+                }
+            }
+        }
     }
 });
 

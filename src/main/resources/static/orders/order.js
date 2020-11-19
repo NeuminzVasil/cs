@@ -5,7 +5,7 @@ let orderTemp = {
     dishes: {}
 };
 
-app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStorage, orderFactory) {
+app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStorage) {
 
     /**
      * Показать сводную информацию о корзине
@@ -18,6 +18,7 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
         }
 
         $scope.order = JSON.parse(sessionStorage.getItem("orderJSON"));
+        $scope.orderDetails = JSON.parse(sessionStorage.getItem("orderDetailsJSON"));
 
     };
     /**
@@ -66,7 +67,7 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
         // получаем данные о новом заказе в sessionStorage
         // orderTemp = JSON.parse(sessionStorage.getItem("orderJSON"));
 
-
+        // так работать с map -для примера сохранить
         /*        orderTemp.customerId = sessionStorage.getItem("userID");
                 orderTemp.restaurantId = restaurant.id;
 

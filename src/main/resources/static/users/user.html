@@ -19,13 +19,14 @@
             <div class="col-sm-6 col-md-4 col-lg-4 mb-4"
                  ng-repeat="order in myOrders">
 
-                <div class="card mb-4 shadow-sm">
+                <div class="card mb-4 shadow-sm"
+                     ng-click="showOrderDetails(order.id)">
 
                     <div class="card-body">
 
                         <p class="card-header">Заказ № {{order.id}}</p>
                         <p class="card-text">от {{order.dateCreated | date: "yyyy.MM.dd hh:MM"}}</p>
-                        <p class="card-text">restaurant {{getR(order.restaurantId)}}</p>
+                        <p class="card-text">restaurant {{getRestaurantName(order.restaurantId)}}</p>
                         <p class="card-text">Статус заказа {{order.status}}</p>
                     </div>
 
