@@ -148,6 +148,20 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
 
     }
 
+    /**
+     * Получить картинку блюда по ID картинки
+     * @returns {string}
+     */
+    $scope.getPicture = function (pictureId) {
+        if (pictureId != null) {
+            return contextPathPictureService + "/picture/menu/get/"
+                + pictureId
+                + "?Authorization=Bearer%20"
+                + $sessionStorage.currentUser.token;
+        }
+        return "assets/img/notFound.png";
+    };
+
 
 });
 
