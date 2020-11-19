@@ -149,6 +149,15 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
     }
 
     /**
+     * Оплатить заказ
+     */
+    $scope.googlePayOrder = function (id) {
+
+        $window.location.href = '#!/googlePayOrder';
+
+    }
+
+    /**
      * Получить картинку блюда по ID картинки
      * @returns {string}
      */

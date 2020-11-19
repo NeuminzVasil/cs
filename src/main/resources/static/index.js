@@ -40,6 +40,9 @@ app.config(function ($routeProvider) {
             templateUrl: 'orders/orderDetails.html',
             controller: 'orderCtrl'
         })
+        .when('/googlePayOrder', {
+            templateUrl: 'pay/pay.html',
+        })
         .otherwise({template: '<h1>404 Error (путь не найден)</h1>'})
 });
 
