@@ -109,20 +109,35 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
      */
     $scope.registerNewRestaurant = function () {
 
-        $http.post(contextPathRestaurantService + '/restaurant/add', $scope.restaurantJSON)
-            .then(function success(response) {
-                $scope.managerJSON.id = response; // todo получить id ресторана
-            }, function error(response) {
-                $log.info(response);
-            });
+        let restaurantInfoTemp = {
+            name: $scope.managerInfo.restaurantName,
+            description: $scope.managerInfo.description
+        };
 
-        $scope.managerJSON.role = "RESTAURANT_ADMIN";
-        $http.post(contextPathUserService + '/reg/restaurant', $scope.managerJSON)
+        $log.info(restaurantInfoTemp)
+
+        $http.post(contextPathRestaurantService + '/restaurant/add', restaurantInfoTemp)
             .then(function success(response) {
-                $window.location.href = '#!/';
-            }, function error(response) {
-                $log.info(response);
-            });
+
+                let managerInfoTemp = {
+                    userId: sessionStorage.getItem("userID"),
+                    restaurantId: response.data,
+                    roleName: "RESTAURANT_MANAGER"
+                };
+
+                $http.post(contextPathUserService + '/update', managerInfoTemp)
+                    .then(function success(response) {
+                        $window.location.href = '#!/';
+                    })
+                    .catch(function (response) {
+                    alert(response);
+                });
+
+            }).catch(function (response) {
+            alert(response);
+        });
+
+
     };
 
     /**

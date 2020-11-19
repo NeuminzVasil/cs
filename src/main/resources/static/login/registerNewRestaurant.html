@@ -12,7 +12,7 @@
                    id="registerRestaurantName"
                    type="text"
                    name="username"
-                   ng-model=restaurantJSON.name>
+                   ng-model=managerInfo.restaurantName>
 
             <label for="registerRestaurantDescription">Описание ресторана</label>
             <input class="col-12"
@@ -20,25 +20,7 @@
                    id="registerRestaurantDescription"
                    type="text"
                    name="username"
-                   ng-model=restaurantJSON.description>
-
-            <label for="registerUsername">Логин менеджера ресторана</label>
-            <input class="col-12"
-                   placeholder="manager name"
-                   id="registerUsername"
-                   type="text"
-                   name="username"
-                   ng-model=managerJSON.username>
-
-            <label for="registerPassword">Пароль менеджера ресторана</label>
-            <input class="col-12"
-                   placeholder="manager password"
-                   id="registerPassword"
-                   type="password"
-                   name="password"
-                   ng-model=managerJSON.password>
-
-            <input hidden type="text" name="role" ng-model=managerJSON.role>
+                   ng-model=managerInfo.description>
 
             <button class="col-12 btn btn-outline-primary" type="submit">зарегистрировать менеджера ресторана</button>
         </form>
