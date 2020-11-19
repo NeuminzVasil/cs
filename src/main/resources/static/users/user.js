@@ -1,6 +1,7 @@
-///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
+app.controller('userCtrl', function ($log, $scope, $http, $sessionStorage, getRestaurantIdFactory) {
 
-app.controller('userCtrl', function ($log, $scope, $http, $sessionStorage) {
+    // $scope.rId = getRestaurantIdFactory.query(2);
+
 
     /**
      * Показать сводную информацию о пользователе
@@ -22,9 +23,15 @@ app.controller('userCtrl', function ($log, $scope, $http, $sessionStorage) {
 
         // получаем данные (в $scope.allUserOrders) о всех заказах пользователя.
         $http.get(contextPathOrderService + '/orders/get/customer/' + $scope.userID, $http.user)
-            .then(function (response) {
-                $scope.allUserOrders = response.data;
+            .then(function success(response) {
+                $scope.myOrders = response.data;
             });
+
+        $http.get(contextPathRestaurantService + '/restaurant/getAll', $http.user)
+            .then(function (response) {
+                $scope.restaurantsList = response.data;
+            });
+
     };
 
     /**
@@ -32,17 +39,11 @@ app.controller('userCtrl', function ($log, $scope, $http, $sessionStorage) {
      */
     $scope.showUserInfo();
 
-    /**
-     *  Получить данные по заказу
-     */
-    $scope.getOrderDetails = function (order) {
 
-        // получаем данные (в $scope.allUserOrders) о всех заказах пользователя.
-        $http.get(contextPathOrderService + '/orders/get/customer/' + $scope.userID, $http.user)
-            .then(function (response) {
-                $scope.allUserOrders = response.data;
-            });
+    $scope.getR = function (rid) {
+        return $scope.restaurantsList.find(x => x.id === rid).name;
     }
+
 });
 
 

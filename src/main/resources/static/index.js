@@ -34,7 +34,7 @@ app.config(function ($routeProvider) {
         })
         .when('/user', {
             templateUrl: 'users/user.html',
-            controller: 'userCtrl'
+            // controller: 'userCtrl'
         })
         .otherwise({template: '<h1>404 Error (путь не найден)</h1>'})
 });
