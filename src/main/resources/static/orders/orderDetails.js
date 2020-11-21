@@ -1,4 +1,4 @@
-app.controller('orderDetailsCtrl', function ( $scope, $window, $http, $sessionStorage) {
+app.controller('orderDetailsCtrl', function ($scope, $window, $http, $sessionStorage) {
 
     /**
      * Показать сводную информацию о корзине
@@ -26,7 +26,7 @@ app.controller('orderDetailsCtrl', function ( $scope, $window, $http, $sessionSt
     $scope.showOrder();
 
     /**
-     * Оплатить заказ
+     * Оплатить заказ фантомно
      */
     $scope.payOrder = function (id) {
 
@@ -45,15 +45,6 @@ app.controller('orderDetailsCtrl', function ( $scope, $window, $http, $sessionSt
             .catch(function (response) {
                 alert(response.data.error);
             });
-
-    }
-
-    /**
-     * Оплатить заказ
-     */
-    $scope.googlePayOrder = function (id) {
-
-        $window.location.href = '#!/googlePayOrder';
 
     }
 
@@ -79,6 +70,74 @@ app.controller('orderDetailsCtrl', function ( $scope, $window, $http, $sessionSt
         return data === "PAID";
     }
 
+
+    //    =============================GooglePay===================================================
+    const allowedPaymentMethods = ["CARD", "TOKENIZED_CARD"];
+    let paymentsClient = null;
+    const tokenizationParameters = {
+        tokenizationType: 'PAYMENT_GATEWAY',
+        parameters: {
+            'gateway': 'example',
+            'gatewayMerchantId': 'abc123'
+        }
+    };
+
+    let transactionInfo = {
+        countryCode: 'RU',
+        currencyCode: 'RUB',
+        totalPriceStatus: 'FINAL',
+        totalPrice: '1.00'
+    }
+
+    const googlePaymentDataConfiguration = {
+        merchantId: "0123456789",
+        paymentMethodTokenizationParameters: tokenizationParameters,
+        allowedPaymentMethods: allowedPaymentMethods,
+        cardRequirements: {
+            allowedCardNetworks: ["MASTERCARD", "VISA"]
+        },
+        emailRequired: true,
+        shippingAddressRequired: true
+    };
+
+    $scope.onGooglePayLoaded = () => {
+        const paymentsClient = getGooglePaymentsClient();
+        paymentsClient.isReadyToPay({allowedPaymentMethods: allowedPaymentMethods})
+            .then(function (response) {
+                if (response.result) {
+                    const paymentDataRequest = googlePaymentDataConfiguration;
+                    paymentDataRequest.transactionInfo = {
+                        totalPriceStatus: 'NOT_CURRENTLY_KNOWN',
+                        currencyCode: 'RUB'
+                    };
+                    getGooglePaymentsClient().prefetchPaymentData(paymentDataRequest);
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    }
+
+    function getGooglePaymentsClient() {
+        if (paymentsClient === null) {
+            paymentsClient = new google.payments.api.PaymentsClient({environment: 'TEST'});
+        }
+        return paymentsClient;
+    }
+
+    $scope.onGooglePaymentButtonClicked = () => {
+        const paymentDataRequest = googlePaymentDataConfiguration;
+        paymentDataRequest.transactionInfo = transactionInfo;
+
+        getGooglePaymentsClient().loadPaymentData(paymentDataRequest)
+            .then(paymentData => {
+                // получаем токен оплаты
+                console.log(paymentData.paymentMethodToken.token);
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    }
 });
 
 
