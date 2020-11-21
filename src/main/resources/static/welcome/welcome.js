@@ -1,6 +1,6 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.controller('welcomeCtrl', function ($log, $scope, $window, $http, $sessionStorage, restaurantsFactory) {
+app.controller('welcomeCtrl', function ( $scope, $window, $http, $sessionStorage, restaurantsFactory) {
 
 
     /**

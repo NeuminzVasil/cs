@@ -1,7 +1,4 @@
-app.controller('userCtrl', function ($log, $scope, $http, $sessionStorage, $window) {
-
-    // $scope.rId = getRestaurantIdFactory.query(2);
-
+app.controller('userCtrl', function ($scope, $http, $sessionStorage, $window) {
 
     /**
      * Показать сводную информацию о пользователе
@@ -62,6 +59,23 @@ app.controller('userCtrl', function ($log, $scope, $http, $sessionStorage, $wind
                 });
         }
     }
+
+    /**
+     * стилизация заказа
+     * @param id
+     */
+    $scope.getBgColor = function (data) {
+        switch (data) {
+            case 'PAID':
+                return "bg-success";
+            case 'SAVED':
+                return "bg-warning";
+            default:
+                return ""
+        }
+    }
+
+
 
 });
 

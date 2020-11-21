@@ -1,6 +1,6 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, $sessionStorage) {
+app.controller('loginCtrl', function ( $scope, $rootScope, $window, $http, $sessionStorage, $route) {
 
     /**
      * получить токен по логину и паролю
@@ -80,7 +80,6 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
                     sessionStorage.setItem("userLastName", response.data.lastName);
                     sessionStorage.setItem("userMail", response.data.email);
                     sessionStorage.setItem("userInfo", JSON.stringify(response.data));
-                    // $log.info(JSON.parse(sessionStorage.getItem("userInfo")));
                 });
         }
         return JSON.parse(sessionStorage.getItem("userInfo"));
@@ -95,7 +94,6 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
 
         $http.post(contextPathUserService + '/reg', JSON.parse(sessionStorage.getItem("userInfo")))
             .then(function success(response) {
-                $log.info(response);
                 $window.location.href = '#!/';
 
             }).catch(function (response) {
@@ -113,8 +111,6 @@ app.controller('loginCtrl', function ($log, $scope, $rootScope, $window, $http, 
             name: $scope.managerInfo.restaurantName,
             description: $scope.managerInfo.description
         };
-
-        $log.info(restaurantInfoTemp)
 
         $http.post(contextPathRestaurantService + '/restaurant/add', restaurantInfoTemp)
             .then(function success(response) {

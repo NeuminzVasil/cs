@@ -38,7 +38,7 @@ app.config(function ($routeProvider) {
         })
         .when('/orderDetails', {
             templateUrl: 'orders/orderDetails.html',
-            controller: 'orderCtrl'
+            controller: 'orderDetailsCtrl'
         })
         .when('/googlePay', {
             templateUrl: 'pay/googlePay.html',

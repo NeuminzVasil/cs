@@ -13,7 +13,6 @@ app.filter('dbToRuss', function () {
     }
 });
 
-
 app.factory('restaurantsFactory', function () {
     return {
         restaurant: {
@@ -54,8 +53,7 @@ app.factory('orderFactory', function () {
     }
 });
 
-
-app.factory('getRestaurantIdFactory', function ($log, $http, $sessionStorage) {
+app.factory('getRestaurantIdFactory', function ( $http, $sessionStorage) {
 
     return {
 
@@ -65,13 +63,11 @@ app.factory('getRestaurantIdFactory', function ($log, $http, $sessionStorage) {
                 $http.defaults.headers.common.Authorization = 'Bearer ' + $sessionStorage.currentUser.token;
             }
 
-            $log.info("restaurantID" + restaurantID);
             $http.get(contextPathRestaurantService
                 + '/restaurant/get/'
                 + restaurantID,
                 $http.user)
                 .then(function (response) {
-                    $log.info(response.data.name);
                     return response.data.name;
                 });
 

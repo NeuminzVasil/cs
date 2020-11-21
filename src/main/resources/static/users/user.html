@@ -23,11 +23,9 @@
                      ng-click="showOrderDetails(order.id)">
 
                     <div class="card-body">
-
-                        <p class="card-header">Заказ № {{order.id}}</p>
+                        <p class="card-header {{getBgColor(order.status)}}">Заказ № {{order.id}} {{order.status | dbToRuss}}</p>
                         <p class="card-text">от {{order.dateCreated | date: "yyyy.MM.dd hh:MM"}}</p>
                         <p class="card-text">restaurant {{getRestaurantName(order.restaurantId)}}</p>
-                        <p class="card-text">Статус заказа {{order.status}}</p>
                     </div>
 
                 </div>

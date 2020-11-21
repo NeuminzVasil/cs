@@ -6,19 +6,23 @@
             <h1 class="col-12">Список блюд в заказе № {{orderDetails.id}}</h1>
         </div>
 
-        <div class="row">
+        <div class="row" ng-hide="isPaid(orderDetails.status)">
             <button type="button"
                     class="col-6 btn btn-sm btn-success"
                     ng-click="payOrder(orderDetails.id)">оплатить заказ (фантомная кнопка для смены статуса заказа)
             </button>
-
-            <a class="col-6 btn btn-primary" href="#!/user">вернуться на страницу заказов</a>
-
             <!--// сюда впилить кнопку  GooglePay-->
             <button type="button"
-                    class="col-12 btn btn-sm btn-danger"
-                    ng-click="googlePayOrder(orderDetails.id)">GooglePay
+                    class="col-6 btn btn-sm btn-danger"
+                    ng-click="googlePayOrder(orderDetails.id)">Оплатить через GooglePay
             </button>
+
+        </div>
+
+        <div class="row">
+
+            <a class="col-12 btn btn-primary" href="#!/user">вернуться на страницу заказов</a>
+
         </div>
 
         <div class="row">
