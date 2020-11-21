@@ -41,8 +41,13 @@ app.controller('loginCtrl', function ( $scope, $rootScope, $window, $http, $sess
     $scope.tryToLogout = function () {
         // отчистка sessionStorage при выходе
         $scope.sessionStorageCleaning();
-        $http.defaults.headers.common.Authorization = '';
+        // $http.defaults.headers.common.Authorization = '';
+        delete $http.defaults.headers.common["Authorization"]
+        delete $sessionStorage;
         $window.location.href = '#';
+        $route.reload();
+        console.log($scope.isLoggedIn());
+        console.log($sessionStorage.currentUser);
     };
 
     /**
