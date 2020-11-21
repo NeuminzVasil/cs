@@ -12,7 +12,6 @@ app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $se
             $http.defaults.headers.common.Authorization = 'Bearer ' + $sessionStorage.currentUser.token;
         }
 
-
         $scope.restaurant = restaurantsFactory.restaurant;
 
         $http.get(contextPathRestaurantService + '/menu/get/' + $scope.restaurant.id, $http.user)
@@ -26,10 +25,10 @@ app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $se
     $scope.showRestaurantInfo();
 
     /**
-     * Получить картинку ресторана по ID картинки
+     * Получить картинку блюда по ID картинки
      * @returns {string}
      */
-    $scope.getPicture = function (pictureId) {
+    $scope.getDishPicture1 = function (pictureId) {
         if (pictureId != null) {
             return contextPathPictureService + "/picture/menu/get/"
                 + pictureId
@@ -45,7 +44,6 @@ app.controller('restaurantInfoCtrl', function ($log, $scope, $window, $http, $se
         else
             return 0;
 
-        // $scope.countIdOrder = JSON.parse(sessionStorage.getItem("orderJSON"));
     }
 
 });

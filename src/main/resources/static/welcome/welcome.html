@@ -1,140 +1,136 @@
-<main id="main">
+<!-- ======= HOW TO ORDER ======= -->
+<section class="section"
+         ng-controller="loginCtrl"
+         ng-show="!isLoggedIn()">
 
-    <!-- ======= HOW TO ORDER ======= -->
-    <section class="section"
-             ng-controller="loginCtrl"
-             ng-show="!isLoggedIn()">
+    <div class="container">
 
-        <div class="container">
+        <div class="row justify-content-center text-center mb-4">
+            <div class="col-6">
+                <h3 class="h3 heading">Эй, время деньги!</h3>
+                <p>Закажи свое блюдо ЗАРАНЕЕ!</p>
+            </div>
+        </div>
 
-            <div class="row justify-content-center text-center mb-4">
-                <div class="col-6">
-                    <h3 class="h3 heading">Эй, время деньги!</h3>
-                    <p>Закажи свое блюдо ЗАРАНЕЕ!</p>
-                </div>
+        <div class="row justify-content-center text-center mb-4">
+            <div class="col-6">
+                <h3 class="h3 heading">Как заказать?</h3>
+                <p>Сделай заказ блюда заранее на сайте или через приложение на мобиле.</p>
+            </div>
+        </div>
+
+        <div class="row row justify-content-center mb-4">
+            <div class="col-12 col-md-6">
+                <span class="la la-cube la-3x mb-4"></span>
+                <h3 class="h3 mb-2">Сделай заказ блюда заранее на сайте.</h3>
+                <ul class="list-unstyled list-line">
+                    <li> Зарегистрируйся на сайте пройдя по
+                        <a class="navbar-brand"
+                           href="#!/registerNewUser">
+                            ЭТОЙ</a> ссылке
+                    </li>
+                    <li> Войди на сайт пройдя по
+                        <a class="navbar-brand"
+                           href="#!/login">
+                            ЭТОЙ</a> ссылке
+                    </li>
+                    <li>Выбери ресторан</li>
+                    <li>Изучи меню</li>
+                    <li>Сделай заказ</li>
+                    <li>Произведи оплату</li>
+                    <li>Получи готовое блюдо</li>
+                </ul>
             </div>
 
-            <div class="row justify-content-center text-center mb-4">
-                <div class="col-6">
-                    <h3 class="h3 heading">Как заказать?</h3>
-                    <p>Сделай заказ блюда заранее на сайте или через приложение на мобиле.</p>
-                </div>
-            </div>
-
-            <div class="row row justify-content-center mb-4">
-                <div class="col-12 col-md-6">
-                    <span class="la la-cube la-3x mb-4"></span>
-                    <h3 class="h3 mb-2">Сделай заказ блюда заранее на сайте.</h3>
-                    <ul class="list-unstyled list-line">
-                        <li> Зарегистрируйся на сайте пройдя по
-                            <a class="navbar-brand"
-                               href="#!/registerNewUser">
-                                ЭТОЙ</a> ссылке
-                        </li>
-                        <li> Войди на сайт пройдя по
-                            <a class="navbar-brand"
-                               href="#!/login">
-                                ЭТОЙ</a> ссылке
-                        </li>
-                        <li>Выбери ресторан</li>
-                        <li>Изучи меню</li>
-                        <li>Сделай заказ</li>
-                        <li>Произведи оплату</li>
-                        <li>Получи готовое блюдо</li>
-                    </ul>
-                </div>
-
-                <div class="col-12 col-md-6">
-                    <span class="la la-mobile la-3x mb-4"></span>
-                    <h3 class="h3 mb-2">Сделай заказ через приложение на мобиле.</h3>
-                    <ul class="list-unstyled list-line">
-                        <li>
-                            <a class="navbar-brand"
-                               href="https://play.google.com/store/apps/details?id=ru.anatomica.cookstarter">
-                                Установи приложение пройдя по ЭТОЙ ссылке</a></li>
-                        <li>Выбери ресторан</li>
-                        <li>Изучи меню</li>
-                        <li>Сделай заказ</li>
-                        <li>Произведи оплату</li>
-                        <li>Получи готовое блюдо</li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <div class="row justify-content-center text-center mb-4">
-                <div class="col-5">
-                    <h3 class="h3 heading">Для корпоративных клиентов.</h3>
-                </div>
-            </div>
-
-            <div class="row row justify-content-center mb-4">
-                <div class="col-12">
-                    <span class="la la-database la-3x mb-4"></span>
-                    <h3 class="h3">Зарегистрируй свой ресторан так.</h3>
-                    <ul class="list-unstyled list-line">
-                        <li> Зарегистрируйся на сайте пройдя по
-                            <a class="navbar-brand"
-                               href="#!/registerNewUser">
-                                ЭТОЙ</a> ссылке
-                        </li>
-                        <li> Войди на сайт пройдя по
-                            <a class="navbar-brand"
-                               href="#!/login">
-                                ЭТОЙ</a> ссылке
-                        </li>
-                        <li>Зарегистрируй свой ресторан по этой ссылке</li>
-                        <li>Наполни меню ресторана свой ресторан по этой ссылке</li>
-                        <li>Получи и обработай заказ</li>
-                        <li>Приступи к готовке блюда</li>
-                    </ul>
-                </div>
+            <div class="col-12 col-md-6">
+                <span class="la la-mobile la-3x mb-4"></span>
+                <h3 class="h3 mb-2">Сделай заказ через приложение на мобиле.</h3>
+                <ul class="list-unstyled list-line">
+                    <li>
+                        <a class="navbar-brand"
+                           href="https://play.google.com/store/apps/details?id=ru.anatomica.cookstarter">
+                            Установи приложение пройдя по ЭТОЙ ссылке</a></li>
+                    <li>Выбери ресторан</li>
+                    <li>Изучи меню</li>
+                    <li>Сделай заказ</li>
+                    <li>Произведи оплату</li>
+                    <li>Получи готовое блюдо</li>
+                </ul>
             </div>
 
         </div>
-    </section><!-- End HOW TO ORDER -->
 
-    <!-- ======= RESTAURANTS ======= -->
-    <section class="section site-portfolio"
-             ng-controller="loginCtrl"
-             ng-show="isLoggedIn()">
-        <div class="container">
+        <div class="row justify-content-center text-center mb-4">
+            <div class="col-5">
+                <h3 class="h3 heading">Для корпоративных клиентов.</h3>
+            </div>
+        </div>
 
-            <div class="row">
-                <div class="col-sm-6 col-md-4 col-lg-4 mb-4"
-                     ng-repeat="restaurant in restaurantsList"
-                     ng-click="showRestaurantById(restaurant)">
+        <div class="row row justify-content-center mb-4">
+            <div class="col-12">
+                <span class="la la-database la-3x mb-4"></span>
+                <h3 class="h3">Зарегистрируй свой ресторан так.</h3>
+                <ul class="list-unstyled list-line">
+                    <li> Зарегистрируйся на сайте пройдя по
+                        <a class="navbar-brand"
+                           href="#!/registerNewUser">
+                            ЭТОЙ</a> ссылке
+                    </li>
+                    <li> Войди на сайт пройдя по
+                        <a class="navbar-brand"
+                           href="#!/login">
+                            ЭТОЙ</a> ссылке
+                    </li>
+                    <li>Зарегистрируй свой ресторан по этой ссылке</li>
+                    <li>Наполни меню ресторана свой ресторан по этой ссылке</li>
+                    <li>Получи и обработай заказ</li>
+                    <li>Приступи к готовке блюда</li>
+                </ul>
+            </div>
+        </div>
 
-                    <div class="card mb-4 shadow-sm">
+    </div>
+</section><!-- End HOW TO ORDER -->
 
-                        <img class="img-fluid" width="100%" height="225" ng-src="{{getPicture(restaurant.pictureId)}}">
+<!-- ======= RESTAURANTS ======= -->
+<section class="section site-portfolio"
+         ng-controller="loginCtrl"
+         ng-show="isLoggedIn()">
+    <div class="container">
 
-                        <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-4 mb-4"
+                 ng-repeat="restaurant in restaurantsList"
+                 ng-click="showRestaurantById(restaurant)">
 
-                            <p class="card-text">{{restaurant.name}} </p>
-                            <p class="card-text">ID Ресторана {{restaurant.id}}</p>
-                            <p class="card-text">{{restaurant.description}}</p>
+                <div class="card mb-4 shadow-sm">
 
-                            <!--<div class="d-flex justify-content-between align-items-center">
+                    <img class="img-fluid" width="100%" height="225" ng-src="{{getPicture(restaurant.pictureId)}}">
 
-                                <div class="btn-group">
-                                    <button type="button"
-                                            class="btn btn-sm btn-outline-secondary">View
-                                    </button>
-                                    <button type="button"
-                                            class="btn btn-sm btn-outline-secondary">Edit
-                                    </button>
-                                </div>
+                    <div class="card-body">
 
-                            </div>-->
-                        </div>
+                        <p class="card-text">{{restaurant.name}} </p>
+                        <p class="card-text">ID Ресторана {{restaurant.id}}</p>
+                        <p class="card-text">{{restaurant.description}}</p>
 
+                        <!--<div class="d-flex justify-content-between align-items-center">
+
+                            <div class="btn-group">
+                                <button type="button"
+                                        class="btn btn-sm btn-outline-secondary">View
+                                </button>
+                                <button type="button"
+                                        class="btn btn-sm btn-outline-secondary">Edit
+                                </button>
+                            </div>
+
+                        </div>-->
                     </div>
 
                 </div>
+
             </div>
-
         </div>
-    </section> <!-- End RESTAURANTS-->
 
-</main><!-- End #main -->
+    </div>
+</section>

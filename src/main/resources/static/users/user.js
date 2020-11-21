@@ -1,4 +1,4 @@
-app.controller('userCtrl', function ($log, $scope, $http, $sessionStorage, $window, orderFactory) {
+app.controller('userCtrl', function ($log, $scope, $http, $sessionStorage, $window) {
 
     // $scope.rId = getRestaurantIdFactory.query(2);
 

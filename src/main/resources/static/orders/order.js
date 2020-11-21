@@ -1,4 +1,3 @@
-///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 let orderTemp = {
     customerId: null,
     restaurantId: null,
@@ -17,6 +16,14 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
             $http.defaults.headers.common.Authorization = 'Bearer ' + $sessionStorage.currentUser.token;
         }
 
+        // получить меню ресторана чтобы добыть picuteId
+        $http.get(contextPathRestaurantService + '/menu/get/'
+            + JSON.parse(sessionStorage.getItem("orderJSON")).restaurantId,
+            $http.user)
+            .then(function (response) {
+                sessionStorage.setItem("restaurantMenu", JSON.stringify(response.data));
+            })
+
         $scope.order = JSON.parse(sessionStorage.getItem("orderJSON"));
         $scope.orderDetails = JSON.parse(sessionStorage.getItem("orderDetailsJSON"));
 
@@ -25,20 +32,6 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
      * Автоматически загрузить данные при старне страницы.
      */
     $scope.showOrder();
-
-    /**
-     * Получить картинку ресторана по ID картинки
-     * @returns {string}
-     */
-    $scope.getPicture = function (pictureId) {
-        if (pictureId != null) {
-            return contextPathPictureService + "/picture/menu/get/"
-                + pictureId
-                + "?Authorization=Bearer%20"
-                + $sessionStorage.currentUser.token;
-        }
-        return "assets/img/notFound.png";
-    };
 
     /**
      * добавить блюдо в корзину
@@ -159,6 +152,23 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
 
     /**
      * Получить картинку блюда по ID картинки
+     * @returns {string}
+     */
+    $scope.getDishPicture2 = function (key) {
+
+        if (key != null) {
+            return contextPathPictureService + "/picture/menu/get/"
+                + JSON.parse(sessionStorage.getItem("restaurantMenu"))
+                    .find(x => x.id === parseInt(key, 10)).pictureId
+                + "?Authorization=Bearer%20"
+                + $sessionStorage.currentUser.token;
+        }
+        return "assets/img/notFound.png";
+    }
+
+
+    /**
+     * Получить картинку ресторана по ID картинки
      * @returns {string}
      */
     $scope.getPicture = function (pictureId) {

@@ -1,6 +1,7 @@
 <!-- ======= Детали заказа ======= -->
 <section class="section site-portfolio">
     <div class="container">
+
         <div class="row">
             <h1 class="col-12">Список блюд в заказе № {{orderDetails.id}}</h1>
         </div>
@@ -13,6 +14,7 @@
 
             <a class="col-6 btn btn-primary" href="#!/user">вернуться на страницу заказов</a>
 
+            <!--// сюда впилить кнопку  GooglePay-->
             <button type="button"
                     class="col-12 btn btn-sm btn-danger"
                     ng-click="googlePayOrder(orderDetails.id)">GooglePay
@@ -20,9 +22,9 @@
         </div>
 
         <div class="row">
-            <p class="col-12">order.customerId: {{orderDetails.customerId}}</p>
-            <p class="col-12">Статус заказа: {{orderDetails.status}}</p>
+<!--            <p class="col-12">order.customerId: {{orderDetails.customerId}}</p>-->
             <p class="col-12">Заказ создан: {{orderDetails.dateCreated | date: "yyyy.MM.dd hh:MM"}}</p>
+            <p class="col-12">Статус заказа: {{orderDetails.status}}</p>
         </div>
 
         <div class="row">
@@ -31,8 +33,7 @@
                  ng-repeat="dish in orderDetails.dishes">
 
                 <div class="card mb-4 shadow-sm">
-
-                    <img class="img-fluid" width="100%" height="225" ng-src="{{getPicture(dish.pictureId)}}">
+                    <img class="img-fluid" width="100%" height="225" ng-src="{{getDishPicture(orderDetails.restaurantId, dish.id)}}">
 
                     <div class="card-body">
 
