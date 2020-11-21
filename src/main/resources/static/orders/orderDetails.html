@@ -22,9 +22,8 @@
         </div>
 
         <div class="row">
-<!--            <p class="col-12">order.customerId: {{orderDetails.customerId}}</p>-->
             <p class="col-12">Заказ создан: {{orderDetails.dateCreated | date: "yyyy.MM.dd hh:MM"}}</p>
-            <p class="col-12">Статус заказа: {{orderDetails.status}}</p>
+            <p class="col-12">Статус заказа: {{orderDetails.status|dbToRuss}}</p>
         </div>
 
         <div class="row">
@@ -37,7 +36,6 @@
 
                     <div class="card-body">
 
-                        <p class="card-text">id {{key}}</p>
                         <p class="card-text">Количество {{value.quantity}}</p>
                         <p class="card-text">Цена {{value.price}} р.</p>
 

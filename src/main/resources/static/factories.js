@@ -1,7 +1,15 @@
-app.filter('isEmpty', function () {
+app.filter('dbToRuss', function () {
     return function (date) {
-        if (date == null) return "не задано";
-        else return date;
+        switch (date) {
+            case 'SAVED':
+                return "ожидает оплаты"
+                break;
+            case 'PAID':
+                return "оплачен"
+                break;
+            default:
+                return "не задано"
+        }
     }
 });
 
