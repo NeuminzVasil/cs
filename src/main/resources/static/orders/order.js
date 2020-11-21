@@ -24,6 +24,13 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
                 sessionStorage.setItem("restaurantMenu", JSON.stringify(response.data));
             })
 
+        $http.get(contextPathRestaurantService + '/menu/get/'
+            + JSON.parse(sessionStorage.getItem("orderDetailsJSON")).restaurantId,
+            $http.user)
+            .then(function (response) {
+                sessionStorage.setItem("restaurantMenu1", JSON.stringify(response.data));
+            })
+
         $scope.order = JSON.parse(sessionStorage.getItem("orderJSON"));
         $scope.orderDetails = JSON.parse(sessionStorage.getItem("orderDetailsJSON"));
 
@@ -154,7 +161,7 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
      * Получить картинку блюда по ID картинки
      * @returns {string}
      */
-    $scope.getDishPicture2 = function (key) {
+    $scope.getDishPicture = function (key) {
 
         if (key != null) {
             return contextPathPictureService + "/picture/menu/get/"
@@ -166,20 +173,20 @@ app.controller('orderCtrl', function ($log, $scope, $window, $http, $sessionStor
         return "assets/img/notFound.png";
     }
 
-
     /**
-     * Получить картинку ресторана по ID картинки
+     * Получить картинку блюда по ID картинки
      * @returns {string}
      */
-    $scope.getPicture = function (pictureId) {
-        if (pictureId != null) {
+    $scope.getDishPicture1 = function (key) {
+        if (key != null) {
             return contextPathPictureService + "/picture/menu/get/"
-                + pictureId
+                + JSON.parse(sessionStorage.getItem("restaurantMenu1"))
+                    .find(x => x.id === parseInt(key, 10)).pictureId
                 + "?Authorization=Bearer%20"
                 + $sessionStorage.currentUser.token;
         }
         return "assets/img/notFound.png";
-    };
+    }
 
 
 });
