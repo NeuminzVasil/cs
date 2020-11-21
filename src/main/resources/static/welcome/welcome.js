@@ -1,6 +1,6 @@
 ///<reference path = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"/>
 
-app.controller('welcomeCtrl', function ($log, $scope, $window, $http, $localStorage, restaurantsFactory) {
+app.controller('welcomeCtrl', function ( $scope, $window, $http, $sessionStorage, restaurantsFactory) {
 
 
     /**
@@ -8,16 +8,15 @@ app.controller('welcomeCtrl', function ($log, $scope, $window, $http, $localStor
      */
     $scope.getAllRest = function () {
         // проверяем вошедшего пользователя (см loginController)
-        // не забыть инжектнуть в контроллер параметр $localStorage
-        if ($localStorage.currentUser) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
+        // не забыть инжектнуть в контроллер параметр $sessionStorage
+        if ($sessionStorage.currentUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $sessionStorage.currentUser.token;
 
         }
 
-        $http.get('https://cookstarter-restaurant-service.herokuapp.com/restaurant/getAll', $http.user)
+        $http.get(contextPathRestaurantService + '/restaurant/getAll', $http.user)
             .then(function (response) {
                 $scope.restaurantsList = response.data;
-                $log.info(response.data);
                 // $window.location.href = '#!/';
             });
     };
@@ -32,7 +31,11 @@ app.controller('welcomeCtrl', function ($log, $scope, $window, $http, $localStor
      */
     $scope.getPicture = function (pictureId) {
         if (pictureId != null) {
-            return "https://picture-service.herokuapp.com/picture/restaurant/get/" + pictureId + "?Authorization=Bearer%20" + $localStorage.currentUser.token;
+            return contextPathPictureService
+                + "/picture/restaurant/get/"
+                + pictureId
+                + "?Authorization=Bearer%20"
+                + $sessionStorage.currentUser.token;
         }
         return "assets/img/notFound.png";
     };

@@ -1,0 +1,52 @@
+<!-- ======= Корзина ======= -->
+<section class="section site-portfolio">
+    <div class="container">
+        <div class="row">
+            <h1 class="col-12">Список блюд в Вашей корзине</h1>
+        </div>
+
+        <div class="row">
+            <button type="button"
+                    class="col-12 btn btn-sm btn-primary"
+                    ng-click="submitOrder()">оформить заказ
+            </button>
+        </div>
+        <div class="row">
+
+            <div class="col-sm-6 col-md-4 col-lg-4 mb-4"
+                 ng-repeat="(key, value) in order.dishes">
+
+                <div class="card mb-4 shadow-sm">
+
+                    <img class="img-fluid" width="100%" height="225" ng-src="{{getDishPicture(key)}}">
+
+                    <div class="card-body">
+
+                        <p class="card-text">Количество {{value.quantity}}</p>
+                        <p class="card-text">Цена {{value.price}} р.</p>
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary">-
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <button type="button"
+                    class="col-12 btn btn-sm btn-primary"
+                    ng-click="submitOrder()">оформить заказ
+            </button>
+        </div>
+
+    </div>
+</section> <!-- End  Works Section -->
+

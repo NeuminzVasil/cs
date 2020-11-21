@@ -28,6 +28,22 @@ app.config(function ($routeProvider) {
             templateUrl: 'restaurantInfo/restaurantInfo.html',
             controller: 'restaurantInfoCtrl'
         })
+        .when('/order', {
+            templateUrl: 'orders/order.html',
+            controller: 'orderCtrl'
+        })
+        .when('/user', {
+            templateUrl: 'users/user.html',
+            controller: 'userCtrl'
+        })
+        .when('/orderDetails', {
+            templateUrl: 'orders/orderDetails.html',
+            controller: 'orderDetailsCtrl'
+        })
+        .when('/googlePay', {
+            templateUrl: 'pay/googlePay.html',
+            // controller: 'googlePayCtrl'
+        })
         .otherwise({template: '<h1>404 Error (путь не найден)</h1>'})
 });
 

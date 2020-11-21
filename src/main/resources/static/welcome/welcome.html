@@ -1,170 +1,135 @@
-<main id="main" ng-controller="welcomeCtrl">
+<!-- ======= HOW TO ORDER ======= -->
+<section class="section"
+         ng-controller="loginCtrl"
+         ng-show="!isLoggedIn()">
 
-    <!-- ======= Works Section ======= -->
-    <section class="section site-portfolio">
-        <div class="container">
-            <div class="row mb-5 align-items-center">
+    <div class="container">
 
-                <div class="col-md-12 col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
-                    <h3>Эй, время деньги!</h3>
-                    <h3>Закажи свое блюдо ЗАРАНЕЕ!</h3>
-                </div>
+        <div class="row justify-content-center text-center mb-4">
+            <div class="col-6">
+                <h3 class="h3 heading">Эй, время деньги!</h3>
+                <p>Закажи свое блюдо ЗАРАНЕЕ!</p>
+            </div>
+        </div>
 
-                <div class="col-md-12 col-lg-6 text-left text-lg-right" data-aos="fade-up" data-aos-delay="100">
-                    <div id="filters" class="filters">
-                        <a href="#" data-filter="*" class="active">All</a>
-                        <a href="#" data-filter=".web">Рестораны</a>
-                        <a href="#" data-filter=".design">Столовые</a>
-                        <a href="#" data-filter=".branding">Фастфуд</a>
-                        <a href="#" data-filter=".photography">Бар\Кафе</a>
-                    </div>
-                </div>
+        <div class="row justify-content-center text-center mb-4">
+            <div class="col-6">
+                <h3 class="h3 heading">Как заказать?</h3>
+                <p>Сделай заказ блюда заранее на сайте или через приложение на мобиле.</p>
+            </div>
+        </div>
 
+        <div class="row row justify-content-center mb-4">
+            <div class="col-12 col-md-6">
+                <span class="la la-cube la-3x mb-4"></span>
+                <h3 class="h3 mb-2">Сделай заказ блюда заранее на сайте.</h3>
+                <ul class="list-unstyled list-line">
+                    <li> Зарегистрируйся на сайте пройдя по
+                        <a class="navbar-brand"
+                           href="#!/registerNewUser">
+                            ЭТОЙ</a> ссылке
+                    </li>
+                    <li> Войди на сайт пройдя по
+                        <a class="navbar-brand"
+                           href="#!/login">
+                            ЭТОЙ</a> ссылке
+                    </li>
+                    <li>Выбери ресторан</li>
+                    <li>Изучи меню</li>
+                    <li>Сделай заказ</li>
+                    <li>Произведи оплату</li>
+                    <li>Получи готовое блюдо</li>
+                </ul>
             </div>
 
-            <div class="row">
+            <div class="col-12 col-md-6">
+                <span class="la la-mobile la-3x mb-4"></span>
+                <h3 class="h3 mb-2">Сделай заказ через приложение на мобиле.</h3>
+                <ul class="list-unstyled list-line">
+                    <li>
+                        <a class="navbar-brand"
+                           href="https://play.google.com/store/apps/details?id=ru.anatomica.cookstarter">
+                            Установи приложение пройдя по ЭТОЙ ссылке</a></li>
+                    <li>Выбери ресторан</li>
+                    <li>Изучи меню</li>
+                    <li>Сделай заказ</li>
+                    <li>Произведи оплату</li>
+                    <li>Получи готовое блюдо</li>
+                </ul>
+            </div>
 
-                <div class="col-sm-6 col-md-4 col-lg-4 mb-4"
-                     ng-repeat="restaurant in restaurantsList"
-                     ng-click="showRestaurantById(restaurant)">
+        </div>
 
-                    <div class="card mb-4 shadow-sm">
+        <div class="row justify-content-center text-center mb-4">
+            <div class="col-5">
+                <h3 class="h3 heading">Для корпоративных клиентов.</h3>
+            </div>
+        </div>
 
-                        <img class="img-fluid" width="100%" height="225" ng-src="{{getPicture(restaurant.pictureId)}}">
+        <div class="row row justify-content-center mb-4">
+            <div class="col-12">
+                <span class="la la-database la-3x mb-4"></span>
+                <h3 class="h3">Зарегистрируй свой ресторан так.</h3>
+                <ul class="list-unstyled list-line">
+                    <li> Зарегистрируйся на сайте пройдя по
+                        <a class="navbar-brand"
+                           href="#!/registerNewUser">
+                            ЭТОЙ</a> ссылке
+                    </li>
+                    <li> Войди на сайт пройдя по
+                        <a class="navbar-brand"
+                           href="#!/login">
+                            ЭТОЙ</a> ссылке
+                    </li>
+                    <li>Зарегистрируй свой ресторан по этой ссылке</li>
+                    <li>Наполни меню ресторана свой ресторан по этой ссылке</li>
+                    <li>Получи и обработай заказ</li>
+                    <li>Приступи к готовке блюда</li>
+                </ul>
+            </div>
+        </div>
 
-                        <div class="card-body">
+    </div>
+</section><!-- End HOW TO ORDER -->
 
-                            <p class="card-text">{{restaurant.name}} ({{restaurant.id}})</p>
-                            <p class="card-text">{{restaurant.description}}</p>
+<!-- ======= RESTAURANTS ======= -->
+<section class="section site-portfolio"
+         ng-controller="loginCtrl"
+         ng-show="isLoggedIn()">
+    <div class="container">
 
-                            <div class="d-flex justify-content-between align-items-center">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-4 mb-4"
+                 ng-repeat="restaurant in restaurantsList"
+                 ng-click="showRestaurantById(restaurant)">
 
-                                <div class="btn-group">
-                                    <button type="button"
-                                            class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button"
-                                            class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
+                <div class="card mb-4 shadow-sm">
 
+                    <img class="img-fluid" width="100%" height="225" ng-src="{{getPicture(restaurant.pictureId)}}">
+
+                    <div class="card-body">
+
+                        <p class="card-text">{{restaurant.name}} </p>
+                        <p class="card-text">{{restaurant.description}}</p>
+
+                        <!--<div class="d-flex justify-content-between align-items-center">
+
+                            <div class="btn-group">
+                                <button type="button"
+                                        class="btn btn-sm btn-outline-secondary">View
+                                </button>
+                                <button type="button"
+                                        class="btn btn-sm btn-outline-secondary">Edit
+                                </button>
                             </div>
-                        </div>
 
+                        </div>-->
                     </div>
 
                 </div>
 
             </div>
-
         </div>
-    </section> <!-- End  Works Section -->
 
-    <!-- ======= how to order Section ======= -->
-    <section class="section">
-        <div class="container">
-            <div class="row justify-content-center text-center mb-4">
-                <div class="col-5">
-                    <h3 class="h3 heading">Как заказать?</h3>
-                    <p>Сделай заказ блюда заранее на сайте</p>
-                    <p>или через приложение на мобиле.</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    <span class="la la-cube la-3x mb-4"></span>
-                    <h4 class="h4 mb-2">Сделай заказ блюда заранее на сайте.</h4>
-                    <ul class="list-unstyled list-line">
-                        <li>Зарегистрируйся на сайте</li>
-                        <li>Выбери ресторан</li>
-                        <li>Изучи меню</li>
-                        <li>Сделай заказ</li>
-                        <li>Произведи оплату</li>
-                        <li>Получи готовое блюдо</li>
-                    </ul>
-                </div>
-                <div class="col-12 col-md-6">
-                    <span class="la la-mobile la-3x mb-4"></span>
-                    <h4 class="h4 mb-2">Сделай заказ через приложение на мобиле.</h4>
-                    <ul class="list-unstyled list-line">
-                        <li>Установи приложение</li>
-                        <li>Выбери ресторан</li>
-                        <li>Изучи меню</li>
-                        <li>Сделай заказ</li>
-                        <li>Произведи оплату</li>
-                        <li>Получи готовое блюдо</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= our Clients Section ======= -->
-    <section class="section">
-        <div class="container">
-            <div class="row justify-content-center text-center mb-4">
-                <div class="col-5">
-                    <h3 class="h3 heading">Наши клиенты</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-4 col-sm-4 col-md-2">
-                    <a href="#" class="client-logo"><img src="assets/img/logo-adobe.png" alt="Image" class="img-fluid"></a>
-                </div>
-                <div class="col-4 col-sm-4 col-md-2">
-                    <a href="#" class="client-logo"><img src="assets/img/logo-uber.png" alt="Image"
-                                                         class="img-fluid"></a>
-                </div>
-                <div class="col-4 col-sm-4 col-md-2">
-                    <a href="#" class="client-logo"><img src="assets/img/logo-apple.png" alt="Image" class="img-fluid"></a>
-                </div>
-                <div class="col-4 col-sm-4 col-md-2">
-                    <a href="#" class="client-logo"><img src="assets/img/logo-netflix.png" alt="Image"
-                                                         class="img-fluid"></a>
-                </div>
-                <div class="col-4 col-sm-4 col-md-2">
-                    <a href="#" class="client-logo"><img src="assets/img/logo-nike.png" alt="Image"
-                                                         class="img-fluid"></a>
-                </div>
-                <div class="col-4 col-sm-4 col-md-2">
-                    <a href="#" class="client-logo"><img src="assets/img/logo-google.png" alt="Image" class="img-fluid"></a>
-                </div>
-
-            </div>
-        </div>
-    </section><!-- End Clients Section -->
-
-    <!-- ======= Testimonials Section ======= -->
-    <section class="section pt-0">
-        <div class="container">
-
-            <div class="owl-carousel testimonial-carousel">
-
-                <div class="testimonial-wrap">
-                    <div class="testimonial">
-                        <img src="assets/img/person_1.jpg" alt="Image" class="img-fluid">
-                        <blockquote>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam necessitatibus incidunt
-                                ut officiis
-                                explicabo inventore.</p>
-                        </blockquote>
-                        <p>&mdash; Jean Hicks</p>
-                    </div>
-                </div>
-
-                <div class="testimonial-wrap">
-                    <div class="testimonial">
-                        <img src="assets/img/person_2.jpg" alt="Image" class="img-fluid">
-                        <blockquote>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam necessitatibus incidunt
-                                ut officiis
-                                explicabo inventore.</p>
-                        </blockquote>
-                        <p>&mdash; Chris Stanworth</p>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section><!-- End Testimonials Section -->
-
-</main><!-- End #main -->
+    </div>
+</section>

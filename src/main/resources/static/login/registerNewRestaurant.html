@@ -1,27 +1,28 @@
-<div class="container" ng-controller="loginCtrl">
+<div class="container">
 
     <div class="row">
 
         <h3 class="col-12">Зарегистрировать новый ресторан</h3>
 
         <form class="col-12" ng-submit="registerNewRestaurant()">
-            <label for="registerUsername">Логин ресторана</label>
+
+            <label for="registerRestaurantName">Наименование ресторана</label>
             <input class="col-12"
-                   placeholder="username"
-                   id="registerUsername"
+                   placeholder="restaurant name"
+                   id="registerRestaurantName"
                    type="text"
                    name="username"
-                   ng-model=restaurantJSON.username>
+                   ng-model=managerInfo.restaurantName>
 
-            <label for="registerPassword">Пароль ресторана</label>
+            <label for="registerRestaurantDescription">Описание ресторана</label>
             <input class="col-12"
-                   placeholder="password"
-                   id="registerPassword"
-                   type="password"
-                   name="password"
-                   ng-model=restaurantJSON.password>
-            <input hidden type="text" name="role" ng-model=restaurantJSON.role>
-            <button class="col-12 btn btn-outline-primary" type="submit">Зарегистрировать ресторан</button>
+                   placeholder="restaurant description"
+                   id="registerRestaurantDescription"
+                   type="text"
+                   name="username"
+                   ng-model=managerInfo.description>
+
+            <button class="col-12 btn btn-outline-primary" type="submit">зарегистрировать менеджера ресторана</button>
         </form>
     </div>
 
